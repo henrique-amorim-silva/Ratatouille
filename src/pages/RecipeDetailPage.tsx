@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useLayoutEffect, useState } from 'react'
 import {
   ArrowLeft,
   CookingPot,
@@ -360,6 +360,10 @@ function RecipeDetailContent({ receita }: { receita: (typeof receitas)[number] }
 export function RecipeDetailPage() {
   const { slug } = useParams()
   const receita = receitas.find((item) => item.slug === slug)
+
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0)
+  }, [slug])
 
   if (!receita) {
     return (

@@ -52,7 +52,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 24px;
+  gap: 18px;
 }
 
 .marca {
@@ -127,13 +127,13 @@
 
 .hero {
   width: min(1200px, calc(100% - 64px));
-  min-height: 490px;
+  min-height: 430px;
   margin: 0 auto;
-  padding: 56px 7.5%;
+  padding: 44px 6.5%;
   display: grid;
   grid-template-columns: 1fr 0.9fr;
   align-items: center;
-  gap: 48px;
+  gap: 36px;
   overflow: hidden;
   border-radius: 26px;
   background: radial-gradient(ellipse at 82% 17%, #e8ebd9 0, transparent 34%), #f0f2e7;
@@ -202,7 +202,7 @@
 }
 
 .hero__ilustracao {
-  min-height: 355px;
+  min-height: 300px;
   position: relative;
   display: grid;
   place-items: center;
@@ -210,8 +210,8 @@
 
 .hero__forma--fundo {
   position: absolute;
-  width: 330px;
-  height: 330px;
+  width: 280px;
+  height: 280px;
   border: 1px solid #d5ddc8;
   border-radius: 50%;
 }
@@ -232,8 +232,8 @@
 }
 
 .hero__prato {
-  width: 260px;
-  height: 260px;
+  width: 230px;
+  height: 230px;
   position: relative;
   z-index: 1;
   display: flex;
@@ -241,9 +241,9 @@
   align-content: center;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  padding: 38px;
-  border: 13px solid #fffdf8;
+  gap: 8px;
+  padding: 32px;
+  border: 11px solid #fffdf8;
   border-radius: 50%;
   background: radial-gradient(circle at center, #f7eedc 0 34%, transparent 35%), #e7d6b8;
   box-shadow:
@@ -253,7 +253,7 @@
 }
 
 .hero__prato > span:not(.hero__prato-centro) {
-  font-size: 47px;
+  font-size: 42px;
   filter: drop-shadow(0 3px 1px #28372d18);
 }
 
@@ -271,9 +271,9 @@
   position: absolute;
   z-index: 2;
   right: 3%;
-  bottom: 30px;
-  width: 100px;
-  height: 100px;
+  bottom: 24px;
+  width: 86px;
+  height: 86px;
   display: grid;
   align-content: center;
   justify-items: center;
@@ -1398,14 +1398,18 @@
 
 @media (max-width: 850px) {
   .hero {
-    min-height: 420px;
-    padding: 48px 6%;
+    min-height: 380px;
+    padding: 40px 5%;
     grid-template-columns: 1fr 0.75fr;
-    gap: 20px;
+    gap: 18px;
   }
 
   .hero__ilustracao {
-    transform: scale(0.85);
+    transform: scale(0.78);
+  }
+
+  .receita-surpresa {
+    gap: 16px;
   }
 
   .grade-receitas {
@@ -1456,20 +1460,20 @@
 
   .hero {
     min-height: 0;
-    padding: 38px 25px 27px;
+    padding: 30px 20px 20px;
     grid-template-columns: 1fr;
-    gap: 6px;
+    gap: 2px;
     border-radius: 19px;
   }
 
   .hero h1 {
-    font-size: clamp(39px, 11vw, 55px);
-    letter-spacing: -1.8px;
+    font-size: clamp(35px, 9.5vw, 48px);
+    letter-spacing: -1.5px;
   }
 
   .hero__descricao {
-    margin: 15px 0 20px;
-    font-size: 14px;
+    margin: 13px 0 17px;
+    font-size: 13px;
   }
 
   .hero__conteudo > .botao {
@@ -1480,41 +1484,41 @@
   }
 
   .hero__nota {
-    margin-top: 14px;
+    margin-top: 12px;
   }
 
   .hero__ilustracao {
-    min-height: 250px;
-    margin-top: 4px;
+    min-height: 190px;
+    margin-top: 0;
     transform: none;
   }
 
   .hero__forma--fundo {
-    width: 230px;
-    height: 230px;
+    width: 175px;
+    height: 175px;
   }
 
   .hero__prato {
-    width: 190px;
-    height: 190px;
-    padding: 26px;
-    border-width: 9px;
+    width: 150px;
+    height: 150px;
+    padding: 20px;
+    border-width: 7px;
   }
 
   .hero__prato > span:not(.hero__prato-centro) {
-    font-size: 34px;
+    font-size: 27px;
   }
 
   .hero__prato-centro {
-    font-size: 10px;
+    font-size: 9px;
   }
 
   .hero__adesivo {
     right: 5%;
-    bottom: 5px;
-    width: 78px;
-    height: 78px;
-    font-size: 12px;
+    bottom: 2px;
+    width: 64px;
+    height: 64px;
+    font-size: 10px;
   }
 
   .receitas {
@@ -1689,9 +1693,9 @@
 
 .receita-surpresa {
   width: min(1100px, calc(100% - 64px));
-  min-height: 220px;
-  margin: 20px auto 0;
-  padding: 26px;
+  min-height: 175px;
+  margin: 16px auto 0;
+  padding: 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1702,7 +1706,7 @@
 }
 
 .receita-surpresa__conteudo {
-  max-width: 470px;
+  max-width: 420px;
 }
 
 .receita-surpresa h2,
@@ -1716,15 +1720,33 @@
   line-height: 1.2;
 }
 
+.receita-surpresa h2 {
+  font-size: clamp(23px, 2.7vw, 30px);
+}
+
 .receita-surpresa__conteudo > p:not(.sobretitulo) {
-  margin: 9px 0 17px;
+  margin: 7px 0 13px;
   color: var(--app-muted);
-  font-size: 13px;
+  font-size: 12px;
 }
 
 .receita-surpresa__resultado {
-  width: min(320px, 44%);
+  width: min(280px, 40%);
   flex: 0 0 auto;
+}
+
+.receita-surpresa__resultado .cartao-receita__capa {
+  height: 150px;
+}
+
+.receita-surpresa__resultado .cartao-receita__conteudo {
+  padding: 14px 15px 13px;
+}
+
+.receita-surpresa__resultado .cartao-receita h3 {
+  min-height: 45px;
+  margin-top: 10px;
+  font-size: 18px;
 }
 
 .receitas-relacionadas {
@@ -2706,7 +2728,11 @@
   }
 
   .receita-surpresa {
-    padding: 20px;
+    padding: 16px;
+  }
+
+  .receita-surpresa__resultado {
+    width: min(280px, 100%);
   }
 
   .receitas-relacionadas {
