@@ -133,7 +133,7 @@ O build executa a verificação TypeScript e gera os arquivos estáticos no dire
 
 ## Publicar no GitHub Pages
 
-O workflow `.github/workflows/pages.yml` executa lint, verificação de tipos, testes e build. Ao enviar alterações para `main`, publica automaticamente o conteúdo de `dist/` no GitHub Pages. Pull requests executam as verificações sem publicar.
+O workflow `.github/workflows/pages.yml` executa lint, verificação de tipos, testes e build. Ao enviar alterações para `master`, publica automaticamente o conteúdo de `dist/` no GitHub Pages. Pull requests executam as verificações sem publicar.
 
 Em **Settings → Pages**, selecione **GitHub Actions** como fonte de publicação. Para repositórios de projeto, o Vite detecta o nome do repositório e configura o _base path_; repositórios `usuario.github.io` e builds locais usam `/`. Para substituir o caminho (por exemplo, ao usar domínio personalizado), defina a variável de repositório `VITE_BASE_PATH` em **Settings → Secrets and variables → Actions → Variables**.
 

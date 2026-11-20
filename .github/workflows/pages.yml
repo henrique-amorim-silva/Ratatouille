@@ -2,9 +2,9 @@ name: Verificar e publicar
 
 on:
   push:
-    branches: [main]
+    branches: [master]
   pull_request:
-    branches: [main]
+    branches: [master]
   workflow_dispatch:
 
 permissions:
@@ -41,7 +41,7 @@ jobs:
           VITE_BASE_PATH: ${{ vars.VITE_BASE_PATH }}
 
   deploy:
-    if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main')
+    if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/master')
     needs: validate
     runs-on: ubuntu-latest
     permissions:
