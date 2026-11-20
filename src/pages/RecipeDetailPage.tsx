@@ -4,14 +4,17 @@ import {
   CookingPot,
   Heart,
   Minus,
+  Printer,
   Plus,
   ShoppingBasket,
   StickyNote,
   UsersRound,
 } from 'lucide-react'
 import { Link, useParams } from 'react-router-dom'
+import { RecipeCard } from '../components/recipe/RecipeCard'
 import { receitas } from '../data/recipes'
 import { ajustarPorcoes } from '../domain/portions'
+import { encontrarReceitasRelacionadas } from '../domain/recipeDiscovery'
 import {
   listarHistoricoPreparos,
   obterAnotacaoReceita,
@@ -33,8 +36,10 @@ function RecipeDetailContent({ receita }: { receita: (typeof receitas)[number] }
   const [salvandoAnotacao, setSalvandoAnotacao] = useState(false)
   const [mensagemMemoria, setMensagemMemoria] = useState('')
   const favorito = useFavoritosStore((estado) => estado.favoritos.includes(receita.id))
+  const favoritos = useFavoritosStore((estado) => estado.favoritos)
   const alternarFavorito = useFavoritosStore((estado) => estado.alternarFavorito)
   const adicionarItem = useListaComprasStore((estado) => estado.adicionarItem)
+  const relacionadas = encontrarReceitasRelacionadas(receita, receitas)
   const ajuste = ajustarPorcoes(receita, porcoes)
   const faltantes = ajuste.ingredientes.filter(
     (ingrediente) => !ingredientesDisponiveis.includes(ingrediente.id),
@@ -138,15 +143,24 @@ function RecipeDetailContent({ receita }: { receita: (typeof receitas)[number] }
               <span>{receita.rendimentoLabel}</span>
             </div>
           </div>
-          <button
-            className={`botao botao--favorito${favorito ? ' botao--favorito-ativo' : ''}`}
-            type="button"
-            aria-pressed={favorito}
-            onClick={() => alternarFavorito(receita.id)}
-          >
-            <Heart size={18} fill={favorito ? 'currentColor' : 'none'} aria-hidden="true" />
-            {favorito ? 'Favoritada' : 'Favoritar'}
-          </button>
+          <div className="detalhe-receita__acoes nao-imprimir">
+            <button
+              className="botao botao--secundario"
+              type="button"
+              onClick={() => window.print()}
+            >
+              <Printer size={17} aria-hidden="true" /> Imprimir receita
+            </button>
+            <button
+              className={`botao botao--favorito${favorito ? ' botao--favorito-ativo' : ''}`}
+              type="button"
+              aria-pressed={favorito}
+              onClick={() => alternarFavorito(receita.id)}
+            >
+              <Heart size={18} fill={favorito ? 'currentColor' : 'none'} aria-hidden="true" />
+              {favorito ? 'Favoritada' : 'Favoritar'}
+            </button>
+          </div>
         </header>
 
         <div className="detalhe-receita__colunas">
@@ -315,6 +329,29 @@ function RecipeDetailContent({ receita }: { receita: (typeof receitas)[number] }
             </p>
           )}
         </section>
+        {relacionadas.length > 0 && (
+          <section
+            className="receitas-relacionadas nao-imprimir"
+            aria-labelledby="relacionadas-titulo"
+          >
+            <div className="receitas__cabecalho">
+              <div>
+                <p className="sobretitulo">MAIS IDEIAS PARA A COZINHA</p>
+                <h2 id="relacionadas-titulo">Você também pode gostar</h2>
+              </div>
+            </div>
+            <div className="grade-receitas">
+              {relacionadas.map((relacionada) => (
+                <RecipeCard
+                  favorita={favoritos.includes(relacionada.id)}
+                  key={relacionada.id}
+                  onAlternarFavorito={alternarFavorito}
+                  receita={relacionada}
+                />
+              ))}
+            </div>
+          </section>
+        )}
       </article>
     </main>
   )

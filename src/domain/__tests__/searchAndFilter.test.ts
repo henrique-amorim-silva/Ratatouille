@@ -27,22 +27,29 @@ describe('buscarEFiltrarReceitas', () => {
     expect(receitas).toEqual(listaOriginal)
   })
 
+  it('encontra as cinco novas receitas pela tag fitness', () => {
+    expect(buscarEFiltrarReceitas(receitas, { consulta: 'fitness' }).map(({ id }) => id)).toEqual([
+      'hamburguer-de-massa-de-pastel',
+      'overnight-oats-de-banana',
+      'pudim-proteico-com-doce-de-leite',
+      'pure-de-couve-flor',
+      'tofu-salteado-com-legumes',
+    ])
+  })
+
   it('ordena por tempo ou título e permite ordem decrescente', () => {
-    expect(buscarEFiltrarReceitas(receitas, { ordenarPor: 'tempo' }).map(({ id }) => id)).toEqual([
-      'bowl-fit-de-frango-e-quinoa',
-      'moqueca-de-banana-da-terra',
-      'bolo-de-cenoura-com-chocolate',
-    ])
-    expect(
-      buscarEFiltrarReceitas(receitas, {
-        ordenarPor: 'titulo',
-        ordem: 'desc',
-      }).map(({ id }) => id),
-    ).toEqual([
-      'moqueca-de-banana-da-terra',
-      'bowl-fit-de-frango-e-quinoa',
-      'bolo-de-cenoura-com-chocolate',
-    ])
+    const porTempo = buscarEFiltrarReceitas(receitas, { ordenarPor: 'tempo' }).map(
+      ({ tempos }) => tempos.totalMinutos,
+    )
+    expect(porTempo).toEqual([...porTempo].sort((a, b) => a - b))
+
+    const titulosDecrescentes = buscarEFiltrarReceitas(receitas, {
+      ordenarPor: 'titulo',
+      ordem: 'desc',
+    }).map(({ titulo }) => titulo)
+    expect(titulosDecrescentes).toEqual(
+      [...titulosDecrescentes].sort((a, b) => b.localeCompare(a, 'pt-BR')),
+    )
   })
 
   it('rejeita tempo máximo inválido', () => {

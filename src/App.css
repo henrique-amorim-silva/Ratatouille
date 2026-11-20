@@ -1290,7 +1290,7 @@
   }
 }
 
-@media (prefers-color-scheme: dark) {
+.app-shell[data-tema='escuro'] {
   .planejador__refeicao select,
   .planejador__porcoes input,
   .receita-memoria textarea {
@@ -1345,17 +1345,16 @@
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  .app-shell {
-    --app-bg: #171d19;
-    --app-surface: #202823;
-    --app-text: #edf1e8;
-    --app-muted: #b0b9ad;
-    --app-green: #a9c49b;
-    --app-green-dark: #d1e0c9;
-    --app-orange: #eaa47b;
-    --app-border: #39443a;
-  }
+.app-shell[data-tema='escuro'] {
+  --app-bg: #171d19;
+  --app-surface: #202823;
+  --app-text: #edf1e8;
+  --app-muted: #b0b9ad;
+  --app-green: #a9c49b;
+  --app-green-dark: #d1e0c9;
+  --app-orange: #eaa47b;
+  --app-border: #39443a;
+  color-scheme: dark;
 
   .hero {
     background: radial-gradient(ellipse at 82% 17%, #374332 0, transparent 34%), #273128;
@@ -1714,6 +1713,55 @@
 
 .home-section--compact {
   padding-top: 32px;
+}
+
+.receita-surpresa {
+  width: min(1100px, calc(100% - 64px));
+  min-height: 220px;
+  margin: 20px auto 0;
+  padding: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  border: 1px solid var(--app-border);
+  border-radius: 18px;
+  background: #f0f2e7;
+}
+
+.receita-surpresa__conteudo {
+  max-width: 470px;
+}
+
+.receita-surpresa h2,
+.receitas-relacionadas h2 {
+  margin: 0;
+  color: var(--app-text);
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(25px, 3vw, 34px);
+  font-weight: 500;
+  letter-spacing: -0.8px;
+  line-height: 1.2;
+}
+
+.receita-surpresa__conteudo > p:not(.sobretitulo) {
+  margin: 9px 0 17px;
+  color: var(--app-muted);
+  font-size: 13px;
+}
+
+.receita-surpresa__resultado {
+  width: min(320px, 44%);
+  flex: 0 0 auto;
+}
+
+.receitas-relacionadas {
+  width: min(1100px, calc(100% - 64px));
+  margin: 46px auto 0;
+}
+
+.receitas-relacionadas .receitas__cabecalho {
+  margin-bottom: 20px;
 }
 
 .home-ver-todas {
@@ -2599,7 +2647,7 @@
   line-height: 1.6;
 }
 
-@media (prefers-color-scheme: dark) {
+.app-shell[data-tema='escuro'] {
   .navegacao__link:hover,
   .navegacao__link--ativo,
   .lista-compras__check--feito {
@@ -2660,6 +2708,15 @@
 }
 
 @media (max-width: 850px) {
+  .receita-surpresa {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .receita-surpresa__resultado {
+    width: min(420px, 100%);
+  }
+
   .categorias-destaque__lista {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -2671,6 +2728,18 @@
 }
 
 @media (max-width: 620px) {
+  .receita-surpresa,
+  .receitas-relacionadas {
+    width: calc(100% - 36px);
+  }
+
+  .receita-surpresa {
+    padding: 20px;
+  }
+
+  .receitas-relacionadas {
+    margin-top: 32px;
+  }
   .site-header--app {
     width: calc(100% - 36px);
     height: 68px;
@@ -2887,5 +2956,303 @@
   .rodape {
     width: calc(100% - 36px);
     margin-bottom: 68px;
+  }
+}
+
+.detalhe-receita__acoes {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 9px;
+}
+
+.alternar-tema {
+  width: 40px;
+  height: 40px;
+}
+
+.app-shell[data-tema='escuro'] {
+  --app-bg: #171d19;
+  --app-surface: #202823;
+  --app-text: #edf1e8;
+  --app-muted: #b0b9ad;
+  --app-green: #a9c49b;
+  --app-green-dark: #8ca980;
+  --app-orange: #eaa47b;
+  --app-border: #39443a;
+  color-scheme: dark;
+}
+
+.app-shell[data-tema='escuro'] .navegacao,
+.app-shell[data-tema='escuro'] .navegacao__link,
+.app-shell[data-tema='escuro'] .rodape > a:last-child {
+  color: var(--app-muted);
+}
+
+.app-shell[data-tema='escuro'] .marca__icone,
+.app-shell[data-tema='escuro'] .etiqueta-dificuldade,
+.app-shell[data-tema='escuro'] .controle-porcoes button,
+.app-shell[data-tema='escuro'] .lista-etapas li > span,
+.app-shell[data-tema='escuro'] .modo-preparo__numero,
+.app-shell[data-tema='escuro'] .modo-preparo__icone-conclusao {
+  background: #344435;
+  color: #d1e0c9;
+}
+
+.app-shell[data-tema='escuro'] .hero {
+  background: radial-gradient(ellipse at 82% 17%, #374332 0, transparent 34%), #273128;
+}
+
+.app-shell[data-tema='escuro'] .hero h1,
+.app-shell[data-tema='escuro'] .receitas__cabecalho h2,
+.app-shell[data-tema='escuro'] .faixa-final h2,
+.app-shell[data-tema='escuro'] .cartao-receita h3 {
+  color: #edf1e8;
+}
+
+.app-shell[data-tema='escuro'] .hero__descricao,
+.app-shell[data-tema='escuro'] .hero__nota,
+.app-shell[data-tema='escuro'] .receitas__subtitulo,
+.app-shell[data-tema='escuro'] .faixa-final p:last-child {
+  color: #b0b9ad;
+}
+
+.app-shell[data-tema='escuro'] .hero__prato {
+  border-color: #e6ddc9;
+}
+
+.app-shell[data-tema='escuro'] .capa--bolo {
+  background:
+    radial-gradient(circle at 50% 54%, #f0d7b1 0 22%, transparent 22.5%),
+    radial-gradient(circle at 50% 57%, #c98d53 0 34%, transparent 34.5%), #42382d;
+}
+
+.app-shell[data-tema='escuro'] .capa--moqueca,
+.app-shell[data-tema='escuro'] .capa--bowl,
+.app-shell[data-tema='escuro'] .capa--padrao {
+  background-color: #344033;
+}
+
+.app-shell[data-tema='escuro'] .cartao-receita,
+.app-shell[data-tema='escuro'] .categoria-atalho,
+.app-shell[data-tema='escuro'] .receita-surpresa {
+  border-color: var(--app-border);
+}
+
+.app-shell[data-tema='escuro'] .cartao-receita__categoria,
+.app-shell[data-tema='escuro'] .cartao-receita__favorito {
+  border-color: #465348;
+  background: #28332b;
+  color: #d1e0c9;
+}
+
+.app-shell[data-tema='escuro'] .cartao-receita__favorito--ativo {
+  color: #f18a82;
+}
+
+.app-shell[data-tema='escuro'] .busca__limpar,
+.app-shell[data-tema='escuro'] .controle-porcoes button {
+  background: #344435;
+  color: #d1e0c9;
+}
+
+.app-shell[data-tema='escuro'] .aviso-porcao {
+  background: #403925;
+  color: #f0d99c;
+}
+
+.app-shell[data-tema='escuro'] input::placeholder,
+.app-shell[data-tema='escuro'] textarea::placeholder {
+  color: #b0b9ad;
+  opacity: 1;
+}
+
+.app-shell[data-tema='escuro'] .cartao-receita__rodape,
+.app-shell[data-tema='escuro'] .lista-ingredientes li,
+.app-shell[data-tema='escuro'] .rodape {
+  border-color: var(--app-border);
+}
+
+.app-shell[data-tema='escuro'] .lista-etapas p,
+.app-shell[data-tema='escuro'] .lista-ingredientes li {
+  color: #c1c9be;
+}
+
+.app-shell[data-tema='escuro'] .faixa-final,
+.app-shell[data-tema='escuro'] .receita-surpresa,
+.app-shell[data-tema='escuro'] .dicas-receita,
+.app-shell[data-tema='escuro'] .modo-preparo__etapa,
+.app-shell[data-tema='escuro'] .conversor-medidas__resultado {
+  background: #273128;
+}
+
+.app-shell[data-tema='escuro'] .faixa-final__icone,
+.app-shell[data-tema='escuro'] .navegacao__link:hover,
+.app-shell[data-tema='escuro'] .navegacao__link--ativo,
+.app-shell[data-tema='escuro'] .lista-compras__check--feito {
+  background: #344435;
+}
+
+.app-shell[data-tema='escuro']
+  .botao:not(.botao--secundario):not(.botao--claro):not(.botao--favorito) {
+  border-color: #496d48;
+  background: #496d48;
+}
+
+.app-shell[data-tema='escuro']
+  .botao:not(.botao--secundario):not(.botao--claro):not(.botao--favorito):hover {
+  background: #3f5d3d;
+}
+
+.app-shell[data-tema='escuro'] .botao--secundario:hover,
+.app-shell[data-tema='escuro'] .botao--claro,
+.app-shell[data-tema='escuro'] .botao--claro:hover {
+  background: #303b31;
+}
+
+.app-shell[data-tema='escuro'] .detalhe-receita__cabecalho {
+  background: linear-gradient(120deg, #273128, #202823);
+}
+
+.app-shell[data-tema='escuro'] .detalhe-receita__metadados span {
+  background: #344435;
+  color: #d1e0c9;
+}
+
+.app-shell[data-tema='escuro'] .dicas-receita p {
+  color: #b0b9ad;
+}
+
+.app-shell[data-tema='escuro'] .mensagem-erro {
+  background: #452b27;
+  color: #ffb4a7;
+}
+
+.app-shell[data-tema='escuro'] .modo-preparo__etapa p {
+  color: #c1c9be;
+}
+
+.app-shell[data-tema='escuro'] .aviso-conversao {
+  background: #403925;
+  color: #f0d99c;
+}
+
+.app-shell[data-tema='escuro'] .aviso-conversao--incerto {
+  border-color: #75463e;
+  background: #452b27;
+  color: #ffb4a7;
+}
+
+.app-shell[data-tema='escuro'] .campo-erro {
+  color: #ffb4a7;
+}
+
+.app-shell[data-tema='escuro'] .despensa-cartao__cabecalho > strong {
+  background: #344435;
+}
+
+.app-shell[data-tema='escuro'] .planejador__refeicao select,
+.app-shell[data-tema='escuro'] .planejador__porcoes input,
+.app-shell[data-tema='escuro'] .receita-memoria textarea {
+  color-scheme: dark;
+}
+
+@page {
+  margin: 14mm;
+}
+
+@media print {
+  body,
+  #root,
+  .app-shell {
+    width: 100%;
+    min-height: 0;
+    margin: 0;
+    border: 0;
+    overflow: visible;
+    background: #fff !important;
+    color: #111 !important;
+    box-shadow: none !important;
+  }
+
+  .site-header,
+  .rodape,
+  .aviso-atualizacao,
+  .voltar-link,
+  .nao-imprimir,
+  .receita-memoria,
+  .botao--lista,
+  .controle-porcoes button,
+  .lista-ingredientes input {
+    display: none !important;
+  }
+
+  .page-main {
+    width: 100%;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+  }
+
+  .detalhe-receita {
+    overflow: visible;
+    border: 0;
+    border-radius: 0;
+    background: #fff !important;
+    color: #111 !important;
+    box-shadow: none;
+  }
+
+  .detalhe-receita__cabecalho {
+    padding: 0 0 16px;
+    display: block;
+    border-bottom: 1px solid #aaa;
+    background: #fff !important;
+  }
+
+  .detalhe-receita h1,
+  .detalhe-receita h2,
+  .detalhe-receita h3,
+  .detalhe-receita p,
+  .detalhe-receita li,
+  .detalhe-receita strong {
+    color: #111 !important;
+  }
+
+  .detalhe-receita__colunas {
+    padding: 18px 0 0;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: 24px;
+  }
+
+  .lista-ingredientes--checklist {
+    padding-left: 18px;
+    list-style: disc;
+  }
+
+  .lista-ingredientes--checklist li {
+    display: list-item;
+    padding: 3px 0;
+    border-color: #ddd;
+  }
+
+  .lista-ingredientes--checklist label {
+    display: inline;
+  }
+
+  .lista-etapas li,
+  .dicas-receita {
+    break-inside: avoid;
+  }
+
+  .dicas-receita {
+    border: 1px solid #bbb;
+    background: #fff !important;
+  }
+
+  .detalhe-receita__metadados span {
+    border: 1px solid #aaa;
+    background: #fff !important;
+    color: #111 !important;
   }
 }

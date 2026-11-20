@@ -40,6 +40,71 @@ test('busca e combina filtros de receita', async ({ page }) => {
   await expect(page.getByRole('heading', { name: tituloBolo })).toBeVisible()
 })
 
+test('exibe as novas opções fitness ao buscar pela categoria', async ({ page }) => {
+  await page.goto('/receitas')
+  await page.getByRole('searchbox', { name: 'Buscar receitas ou ingredientes' }).fill('fitness')
+
+  await expect(page.getByText('5 receitas encontradas')).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Pudim proteico individual' })).toBeVisible()
+  await expect(
+    page.getByRole('heading', { name: 'Hambúrguer de massa de pastel na air fryer' }),
+  ).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Purê leve de couve-flor' })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Overnight oats de banana' })).toBeVisible()
+  await expect(
+    page.getByRole('heading', { name: 'Tofu salteado com legumes e arroz integral' }),
+  ).toBeVisible()
+})
+
+test('exibe os modos de preparo atualizados das três receitas', async ({ page }) => {
+  await page.goto('/receitas/hamburguer-de-massa-de-pastel')
+  await expect(page.getByRole('heading', { name: 'Frite a carne na frigideira' })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Enrole na massa de pastel' })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Doure na air fryer' })).toBeVisible()
+
+  await page.goto('/receitas/pudim-proteico-com-doce-de-leite')
+  await expect(page.getByRole('heading', { name: 'Distribua nos potes de vidro' })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Cozinhe em banho-maria no fogão' })).toBeVisible()
+  await expect(page.getByText(/não use potes comuns nem vidro trincado/i)).toBeVisible()
+  await expect(page.getByText('2 colheres de sopa')).toBeVisible()
+  await expect(page.getByText('300 ml')).toBeVisible()
+
+  await page.goto('/receitas/pure-de-couve-flor')
+  await expect(
+    page.getByRole('heading', { name: 'Bata com os temperos e a cremosidade' }),
+  ).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Finalize com o queijo' })).toBeVisible()
+  await expect(page.getByText(/couve-flor média separada em buquês/)).toBeVisible()
+})
+
+test('sorteia uma receita nova e mantém o tema escuro após recarregar', async ({ page }) => {
+  await page.goto('/')
+
+  await page.getByRole('button', { name: 'Me surpreenda' }).click()
+  const primeiraReceita = await page.locator('.receita-surpresa__resultado h3').textContent()
+  await page.getByRole('button', { name: 'Sortear outra receita' }).click()
+  const segundaReceita = await page.locator('.receita-surpresa__resultado h3').textContent()
+  expect(segundaReceita).not.toBe(primeiraReceita)
+
+  await page.getByRole('button', { name: 'Ativar modo escuro' }).click()
+  await expect(page.locator('.app-shell')).toHaveAttribute('data-tema', 'escuro')
+  await page.reload()
+  await expect(page.locator('.app-shell')).toHaveAttribute('data-tema', 'escuro')
+})
+
+test('mostra recomendações e imprime apenas o conteúdo da receita', async ({ page }) => {
+  await page.goto('/receitas/risoto-cremoso-de-cogumelos')
+
+  await expect(page.getByRole('heading', { name: 'Você também pode gostar' })).toBeVisible()
+  await expect(page.locator('.receitas-relacionadas .cartao-receita')).toHaveCount(3)
+  await expect(page.getByRole('button', { name: 'Imprimir receita' })).toBeVisible()
+
+  await page.emulateMedia({ media: 'print' })
+  await expect(page.locator('.site-header')).toBeHidden()
+  await expect(page.locator('.detalhe-receita')).toBeVisible()
+  await expect(page.locator('.receita-memoria')).toBeHidden()
+})
+
 test('ajusta porções, envia faltantes para compras e mantém a lista após recarregar', async ({
   page,
 }) => {
@@ -142,6 +207,21 @@ test('valida rótulos, contraste, teclado, texto alternativo e movimento reduzid
       contraste.nome,
     ).toBeGreaterThanOrEqual(4.5)
   }
+  await page.getByRole('button', { name: 'Ativar modo escuro' }).click()
+  const contrastePlaceholderEscuro = await page
+    .locator('.catalogo__busca input')
+    .evaluate((input) => {
+      const shell = input.closest('.app-shell')
+      if (!shell) throw new Error('Tema não encontrado para validar o placeholder.')
+      return {
+        texto: getComputedStyle(input, '::placeholder').color,
+        fundo: getComputedStyle(shell).getPropertyValue('--app-surface').trim(),
+      }
+    })
+  expect(
+    calcularContraste(contrastePlaceholderEscuro.texto, contrastePlaceholderEscuro.fundo),
+    'placeholder no tema escuro',
+  ).toBeGreaterThanOrEqual(4.5)
   expect(Number.parseFloat(cores.duracaoTransicao)).toBeLessThanOrEqual(0.001)
   expect(
     await page

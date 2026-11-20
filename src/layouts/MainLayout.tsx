@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import {
   Archive,
   CalendarDays,
@@ -6,8 +7,10 @@ import {
   Heart,
   House,
   ListChecks,
+  Moon,
   Scale,
   Search,
+  Sun,
 } from 'lucide-react'
 import { NavLink, Outlet } from 'react-router-dom'
 import { PwaUpdatePrompt } from '../components/layout/PwaUpdatePrompt'
@@ -25,8 +28,21 @@ const links = [
 ]
 
 export function MainLayout() {
+  const [tema, setTema] = useState<'claro' | 'escuro'>(() => {
+    const temaSalvo = localStorage.getItem('ratatouille-tema')
+    if (temaSalvo === 'claro' || temaSalvo === 'escuro') {
+      return temaSalvo
+    }
+
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'escuro' : 'claro'
+  })
+
+  useEffect(() => {
+    localStorage.setItem('ratatouille-tema', tema)
+  }, [tema])
+
   return (
-    <div className="app-shell">
+    <div className="app-shell" data-tema={tema}>
       <header className="site-header site-header--app">
         <NavLink className="marca" to="/" aria-label="Ratatouille, página inicial">
           <span className="marca__icone" aria-hidden="true">
@@ -52,6 +68,19 @@ export function MainLayout() {
         <NavLink className="botao botao--pequeno site-header__acao" to="/receitas">
           Buscar <Search size={16} />
         </NavLink>
+        <button
+          className="botao-icone alternar-tema"
+          type="button"
+          aria-label={tema === 'escuro' ? 'Ativar modo claro' : 'Ativar modo escuro'}
+          aria-pressed={tema === 'escuro'}
+          onClick={() => setTema((atual) => (atual === 'escuro' ? 'claro' : 'escuro'))}
+        >
+          {tema === 'escuro' ? (
+            <Sun size={18} aria-hidden="true" />
+          ) : (
+            <Moon size={18} aria-hidden="true" />
+          )}
+        </button>
       </header>
 
       <Outlet />

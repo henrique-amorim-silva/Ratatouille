@@ -16,6 +16,9 @@ O projeto funciona inteiramente no navegador: não possui API, autenticação, b
 - Conversor de unidades e equivalências de cozinha.
 - Correspondência de receitas por ingredientes disponíveis.
 - Histórico de preparos e anotações por receita.
+- Sorteio de receita surpresa e sugestões relacionadas por categoria e ingredientes.
+- Impressão otimizada da ficha da receita.
+- Tema claro/escuro selecionável e salvo no dispositivo.
 - Exportação e restauração de backup JSON.
 - PWA instalável, suporte offline para recursos em cache e aviso de atualização.
 - Tema claro/escuro, interface responsiva e navegação semântica.
@@ -132,9 +135,9 @@ O build executa a verificação TypeScript e gera os arquivos estáticos no dire
 
 O workflow `.github/workflows/pages.yml` executa lint, verificação de tipos, testes e build. Ao enviar alterações para `main`, publica automaticamente o conteúdo de `dist/` no GitHub Pages. Pull requests executam as verificações sem publicar.
 
-Em **Settings → Pages**, selecione **GitHub Actions** como fonte de publicação. Para repositórios de projeto, o Vite detecta o nome do repositório e configura o *base path*; repositórios `usuario.github.io` e builds locais usam `/`. Para substituir o caminho (por exemplo, ao usar domínio personalizado), defina a variável de repositório `VITE_BASE_PATH` em **Settings → Secrets and variables → Actions → Variables**.
+Em **Settings → Pages**, selecione **GitHub Actions** como fonte de publicação. Para repositórios de projeto, o Vite detecta o nome do repositório e configura o _base path_; repositórios `usuario.github.io` e builds locais usam `/`. Para substituir o caminho (por exemplo, ao usar domínio personalizado), defina a variável de repositório `VITE_BASE_PATH` em **Settings → Secrets and variables → Actions → Variables**.
 
-O build gera `404.html` a partir do `index.html` para que o GitHub Pages carregue a aplicação ao acessar diretamente ou recarregar uma rota SPA. O React Router e os recursos da PWA usam o mesmo *base path*.
+O build gera `404.html` a partir do `index.html` para que o GitHub Pages carregue a aplicação ao acessar diretamente ou recarregar uma rota SPA. O React Router e os recursos da PWA usam o mesmo _base path_.
 
 Em Vercel ou Cloudflare Pages, use `npm run build` como comando de build e `dist` como diretório de saída. Configure `VITE_BASE_PATH=/` (padrão) e uma regra de fallback de rotas SPA para `/index.html` no provedor.
 

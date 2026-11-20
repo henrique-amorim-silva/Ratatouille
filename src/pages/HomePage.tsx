@@ -1,7 +1,10 @@
-import { ArrowRight, Leaf } from 'lucide-react'
+import { ArrowRight, Leaf, Sparkles } from 'lucide-react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { RecipeCard } from '../components/recipe/RecipeCard'
 import { receitas } from '../data/recipes'
+import { selecionarReceitaSurpresa } from '../domain/recipeDiscovery'
+import type { Receita } from '../types/recipe'
 import { useFavoritosStore } from '../store/favoritosStore'
 
 const categoriasDestaque = [
@@ -12,6 +15,7 @@ const categoriasDestaque = [
 ]
 
 export function HomePage() {
+  const [receitaSurpresa, setReceitaSurpresa] = useState<Receita | null>(null)
   const favoritos = useFavoritosStore((estado) => estado.favoritos)
   const alternarFavorito = useFavoritosStore((estado) => estado.alternarFavorito)
   const destaques = [receitas[0], receitas[1]].filter((receita) => receita !== undefined)
@@ -62,6 +66,33 @@ export function HomePage() {
           <span className="hero__pontinho hero__pontinho--um">✳</span>
           <span className="hero__pontinho hero__pontinho--dois">✳</span>
         </div>
+      </section>
+
+      <section className="receita-surpresa" aria-labelledby="receita-surpresa-titulo">
+        <div className="receita-surpresa__conteudo">
+          <p className="sobretitulo">SEM IDEIAS PARA HOJE?</p>
+          <h2 id="receita-surpresa-titulo">O que vamos cozinhar hoje?</h2>
+          <p>Deixe a cozinha escolher uma receita gostosa para você.</p>
+          <button
+            className="botao"
+            type="button"
+            onClick={() =>
+              setReceitaSurpresa(selecionarReceitaSurpresa(receitas, receitaSurpresa?.id))
+            }
+          >
+            <Sparkles size={17} aria-hidden="true" />
+            {receitaSurpresa ? 'Sortear outra receita' : 'Me surpreenda'}
+          </button>
+        </div>
+        {receitaSurpresa && (
+          <div className="receita-surpresa__resultado" aria-live="polite">
+            <RecipeCard
+              favorita={favoritos.includes(receitaSurpresa.id)}
+              onAlternarFavorito={alternarFavorito}
+              receita={receitaSurpresa}
+            />
+          </div>
+        )}
       </section>
 
       <section className="receitas home-section">
