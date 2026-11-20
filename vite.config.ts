@@ -3,8 +3,18 @@ import { defineConfig } from 'vite'
 import tailwindcss from '@tailwindcss/vite'
 import { VitePWA } from 'vite-plugin-pwa'
 
+const repositoryName = process.env.GITHUB_REPOSITORY?.split('/')[1]
+const base =
+  process.env.VITE_BASE_PATH ||
+  (process.env.GITHUB_ACTIONS === 'true' &&
+  repositoryName &&
+  !repositoryName.endsWith('.github.io')
+    ? `/${repositoryName}/`
+    : '/')
+
 // https://vite.dev/config/
 export default defineConfig({
+  base,
   plugins: [
     react(),
     tailwindcss(),
@@ -19,10 +29,10 @@ export default defineConfig({
         theme_color: '#315d43',
         background_color: '#fbf9f4',
         display: 'standalone',
-        start_url: '/',
+        start_url: base,
         icons: [
           {
-            src: '/pwa-icon.svg',
+            src: `${base}pwa-icon.svg`,
             sizes: 'any',
             type: 'image/svg+xml',
             purpose: 'any maskable',
@@ -31,7 +41,7 @@ export default defineConfig({
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,svg,png,woff2}'],
-        navigateFallback: '/index.html',
+        navigateFallback: 'index.html',
       },
     }),
   ],

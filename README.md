@@ -128,6 +128,16 @@ npm run preview
 
 O build executa a verificação TypeScript e gera os arquivos estáticos no diretório de saída do Vite.
 
+## Publicar no GitHub Pages
+
+O workflow `.github/workflows/pages.yml` executa lint, verificação de tipos, testes e build. Ao enviar alterações para `main`, publica automaticamente o conteúdo de `dist/` no GitHub Pages. Pull requests executam as verificações sem publicar.
+
+Em **Settings → Pages**, selecione **GitHub Actions** como fonte de publicação. Para repositórios de projeto, o Vite detecta o nome do repositório e configura o *base path*; repositórios `usuario.github.io` e builds locais usam `/`. Para substituir o caminho (por exemplo, ao usar domínio personalizado), defina a variável de repositório `VITE_BASE_PATH` em **Settings → Secrets and variables → Actions → Variables**.
+
+O build gera `404.html` a partir do `index.html` para que o GitHub Pages carregue a aplicação ao acessar diretamente ou recarregar uma rota SPA. O React Router e os recursos da PWA usam o mesmo *base path*.
+
+Em Vercel ou Cloudflare Pages, use `npm run build` como comando de build e `dist` como diretório de saída. Configure `VITE_BASE_PATH=/` (padrão) e uma regra de fallback de rotas SPA para `/index.html` no provedor.
+
 ## PWA
 
 A configuração em `vite.config.ts` registra o manifesto e os recursos offline. Os ativos JavaScript, CSS, HTML, imagens SVG e fontes necessárias são armazenados pelo Workbox.
