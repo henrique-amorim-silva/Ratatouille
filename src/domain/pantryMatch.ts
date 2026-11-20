@@ -26,7 +26,7 @@ function normalizarTexto(texto: string): string {
     .join(' ')
 }
 
-function correspondeIngrediente(nomeReceita: string, nomeInformado: string): boolean {
+export function correspondeIngrediente(nomeReceita: string, nomeInformado: string): boolean {
   const nomeNormalizado = normalizarTexto(nomeReceita)
   const informadoNormalizado = normalizarTexto(nomeInformado)
 
@@ -34,16 +34,37 @@ function correspondeIngrediente(nomeReceita: string, nomeInformado: string): boo
     return false
   }
 
-  return (
-    nomeNormalizado === informadoNormalizado ||
-    new RegExp(
-      `(^|[^\\p{L}\\p{N}])${escaparRegex(informadoNormalizado)}([^\\p{L}\\p{N}]|$)`,
-      'u',
-    ).test(nomeNormalizado) ||
-    new RegExp(`(^|[^\\p{L}\\p{N}])${escaparRegex(nomeNormalizado)}([^\\p{L}\\p{N}]|$)`, 'u').test(
-      informadoNormalizado,
-    )
-  )
+  if (nomeNormalizado === informadoNormalizado) {
+    return true
+  }
+
+  const ingredientesDerivadosDeLeite = [
+    'doce de leite',
+    'creme de leite',
+    'leite condensado',
+    'leite de coco',
+  ]
+
+  if (informadoNormalizado === 'leite' && ingredientesDerivadosDeLeite.includes(nomeNormalizado)) {
+    return false
+  }
+
+  if (nomeNormalizado === 'leite' && ingredientesDerivadosDeLeite.includes(informadoNormalizado)) {
+    return false
+  }
+
+  if (nomeNormalizado.startsWith(`${informadoNormalizado} `)) {
+    return true
+  }
+
+  if (informadoNormalizado.startsWith(`${nomeNormalizado} `)) {
+    return true
+  }
+
+  return new RegExp(
+    `(^|[^\\p{L}\\p{N}])${escaparRegex(informadoNormalizado)}([^\\p{L}\\p{N}]|$)`,
+    'u',
+  ).test(nomeNormalizado)
 }
 
 function escaparRegex(texto: string): string {

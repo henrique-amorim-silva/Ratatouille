@@ -11,7 +11,7 @@ export const pudimProteicoDoceDeLeite = {
   categoriaPrincipal: 'Sobremesas',
   categorias: ['Sobremesas', 'Saudáveis'],
   subcategorias: ['Doces proteicos', 'Pudins'],
-  tags: ['fit', 'fitness', 'proteico', 'pudim', 'leite em pó'],
+  tags: ['fit', 'fitness', 'proteico', 'pudim', 'leite em pó', 'doce de leite'],
   dificuldade: 'fácil',
   tempos: {
     preparoMinutos: 5,
@@ -53,12 +53,12 @@ export const pudimProteicoDoceDeLeite = {
       opcional: true,
       indivisivel: false,
     },
-     {
+    {
       id: 'doce-de-leite',
       nome: 'doce de leite',
       quantidade: 80,
       unidade: 'g',
-      opcional: true,
+      opcional: false,
       indivisivel: false,
     },
   ],
@@ -90,7 +90,7 @@ export const pudimProteicoDoceDeLeite = {
       titulo: 'Resfrie e adicione o doce de leite',
       descricao:
         'Retire os potes da panela com cuidado e deixe esfriar. Adicione o doce de leite. Sirva em temperatura ambiente ou leve à geladeira para servir gelado.',
-      ingredientesVinculados: [],
+      ingredientesVinculados: ['doce-de-leite'],
     },
   ],
   dicas: [

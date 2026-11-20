@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { receitas } from '../../data/recipes'
-import { buscarReceitasComDespensa } from '../pantryMatch'
+import { buscarReceitasComDespensa, correspondeIngrediente } from '../pantryMatch'
 
 describe('buscarReceitasComDespensa', () => {
   it('calcula compatibilidade pelos ingredientes obrigatórios e ordena melhor combinação primeiro', () => {
@@ -42,6 +42,32 @@ describe('buscarReceitasComDespensa', () => {
 
     expect(resultado[0]?.ingredientesFaltantes).not.toContainEqual(
       expect.objectContaining({ id: 'tomate-cereja' }),
+    )
+  })
+
+  it('não confunde leite comum com ingredientes derivados de leite', () => {
+    expect(correspondeIngrediente('doce de leite', 'leite')).toBe(false)
+    expect(correspondeIngrediente('creme de leite', 'leite')).toBe(false)
+    expect(correspondeIngrediente('leite de coco', 'leite')).toBe(false)
+    expect(correspondeIngrediente('leite desnatado', 'leite')).toBe(true)
+  })
+
+  it('aumenta a compatibilidade ao informar doce de leite', () => {
+    const pudim = receitas.find(({ id }) => id === 'pudim-proteico-com-doce-de-leite')
+
+    expect(pudim).toBeDefined()
+
+    const resultado = buscarReceitasComDespensa(
+      [pudim!],
+      ['ovos', 'leite em pó desnatado', 'leite desnatado'],
+    )[0]
+    const resultadoComDoce = buscarReceitasComDespensa(
+      [pudim!],
+      ['ovos', 'leite em pó desnatado', 'leite desnatado', 'doce de leite'],
+    )[0]
+
+    expect(resultadoComDoce?.percentualCompatibilidade).toBeGreaterThan(
+      resultado?.percentualCompatibilidade ?? 0,
     )
   })
 

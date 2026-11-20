@@ -1,4 +1,5 @@
 import type { DificuldadeReceita, Receita } from '../types/recipe'
+import { correspondeIngrediente } from './pantryMatch'
 
 export type OrdenacaoReceitas = 'titulo' | 'tempo' | 'rendimento'
 
@@ -40,14 +41,13 @@ export function buscarEFiltrarReceitas(
   const ingredientes = (filtros.ingredientes ?? []).map(normalizarTexto)
 
   const resultado = receitas.filter((receita) => {
-    const camposBusca = [
-      receita.titulo,
-      ...receita.tags,
-      ...receita.ingredientes.map(({ nome }) => nome),
-    ].map(normalizarTexto)
+    const camposTexto = [receita.titulo, ...receita.tags].map(normalizarTexto)
+    const ingredientesReceita = receita.ingredientes.map(({ nome }) => nome)
 
-    const correspondeBusca = termosBusca.every((termo) =>
-      camposBusca.some((campo) => campo.includes(termo)),
+    const correspondeBusca = termosBusca.every(
+      (termo) =>
+        camposTexto.some((campo) => campo.includes(termo)) ||
+        ingredientesReceita.some((item) => correspondeIngrediente(item, termo)),
     )
     const correspondeCategoria =
       !categoria ||
@@ -56,9 +56,8 @@ export function buscarEFiltrarReceitas(
     const correspondeTags = tags.every((tag) =>
       receita.tags.some((item) => normalizarTexto(item) === tag),
     )
-    const ingredientesReceita = receita.ingredientes.map(({ nome }) => normalizarTexto(nome))
     const correspondeIngredientes = ingredientes.every((ingrediente) =>
-      ingredientesReceita.some((item) => item.includes(ingrediente)),
+      ingredientesReceita.some((item) => correspondeIngrediente(item, ingrediente)),
     )
     const correspondeDificuldade =
       !filtros.dificuldade || receita.dificuldade === filtros.dificuldade

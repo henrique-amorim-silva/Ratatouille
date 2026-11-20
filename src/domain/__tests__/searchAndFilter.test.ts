@@ -9,6 +9,7 @@ describe('buscarEFiltrarReceitas', () => {
       'bolo-de-banana-fit',
       'bowl-fit-de-frango-e-quinoa',
       'hamburguer-de-massa-de-pastel',
+      'nuggets-fit-caseiro',
       'overnight-oats-de-banana',
       'pudim-proteico-com-doce-de-leite',
       'pure-de-couve-flor',
@@ -31,6 +32,13 @@ describe('buscarEFiltrarReceitas', () => {
 
     expect(resultado.map(({ id }) => id)).toEqual(['bowl-fit-de-frango-e-quinoa'])
     expect(receitas).toEqual(listaOriginal)
+  })
+
+  it('não confunde o filtro de ingrediente leite com doce de leite', () => {
+    const resultado = buscarEFiltrarReceitas(receitas, { ingredientes: ['leite'] })
+
+    expect(resultado.map(({ id }) => id)).not.toContain('bolo-de-cenoura-com-chocolate')
+    expect(resultado.map(({ id }) => id)).not.toContain('moqueca-de-banana-da-terra')
   })
 
   it('encontra as seis receitas pela tag fitness', () => {
