@@ -1,10 +1,11 @@
-import { ChefHat, Heart, House, ListChecks, Search } from 'lucide-react'
+import { ChefHat, CookingPot, Heart, House, ListChecks, Search } from 'lucide-react'
 import { NavLink, Outlet } from 'react-router-dom'
 import '../App.css'
 
 const links = [
   { to: '/', label: 'Início', Icon: House, end: true },
   { to: '/receitas', label: 'Receitas', Icon: Search, end: false },
+  { to: '/despensa', label: 'Minha despensa', Icon: CookingPot, end: false },
   { to: '/favoritos', label: 'Favoritos', Icon: Heart, end: false },
   { to: '/lista-de-compras', label: 'Compras', Icon: ListChecks, end: false },
 ]

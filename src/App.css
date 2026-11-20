@@ -1218,7 +1218,9 @@
   border-radius: 999px;
   color: #647064;
   font-size: 13px;
-  transition: background 150ms ease, color 150ms ease;
+  transition:
+    background 150ms ease,
+    color 150ms ease;
 }
 
 .navegacao__link:hover,
@@ -1301,7 +1303,9 @@
   color: var(--app-text);
   font-size: 13px;
   font-weight: 650;
-  transition: border-color 150ms ease, transform 150ms ease;
+  transition:
+    border-color 150ms ease,
+    transform 150ms ease;
 }
 
 .categoria-atalho:hover {
@@ -1704,6 +1708,20 @@
   text-decoration: line-through;
 }
 
+.lista-compras__categoria {
+  margin-top: 20px;
+}
+
+.lista-compras__categoria h3 {
+  margin: 0;
+  padding: 0 0 5px;
+  color: var(--app-muted);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+
 .botao-texto {
   border: 0;
   background: transparent;
@@ -1711,6 +1729,142 @@
   cursor: pointer;
   font-size: 12px;
   font-weight: 650;
+}
+
+.despensa-formulario {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 24px;
+  display: grid;
+  gap: 18px;
+  border: 1px solid var(--app-border);
+  border-radius: 17px;
+  background: var(--app-surface);
+}
+
+.despensa-formulario label {
+  display: grid;
+  gap: 8px;
+  color: var(--app-text);
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.despensa-formulario label small {
+  color: var(--app-muted);
+  font-weight: 400;
+}
+
+.despensa-formulario textarea {
+  width: 100%;
+  min-height: 54px;
+  padding: 12px 14px;
+  resize: vertical;
+  border: 1px solid var(--app-border);
+  border-radius: 10px;
+  outline: 0;
+  background: var(--app-bg);
+  color: var(--app-text);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.despensa-formulario textarea:focus {
+  border-color: #9bab8e;
+  box-shadow: 0 0 0 3px #315d4314;
+}
+
+.despensa-formulario .botao {
+  justify-self: start;
+}
+
+.despensa-resultados {
+  margin-top: 54px;
+}
+
+.despensa-resultados__cabecalho {
+  margin-bottom: 20px;
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.despensa-resultados__cabecalho h2 {
+  margin: 0;
+  color: var(--app-text);
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 27px;
+  font-weight: 500;
+}
+
+.despensa-resultados__cabecalho > p {
+  color: var(--app-muted);
+  font-size: 12px;
+}
+
+.despensa-resultados__lista {
+  display: grid;
+  gap: 14px;
+}
+
+.despensa-cartao {
+  padding: 21px;
+  border: 1px solid var(--app-border);
+  border-radius: 15px;
+  background: var(--app-surface);
+}
+
+.despensa-cartao__cabecalho {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.despensa-cartao__cabecalho .sobretitulo {
+  margin-bottom: 5px;
+}
+
+.despensa-cartao__cabecalho h2 {
+  margin: 0;
+  color: var(--app-text);
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 23px;
+  font-weight: 500;
+}
+
+.despensa-cartao__cabecalho > strong {
+  flex: 0 0 auto;
+  padding: 7px 10px;
+  border-radius: 999px;
+  background: #e8efe3;
+  color: var(--app-green);
+  font-size: 12px;
+}
+
+.despensa-cartao > p {
+  margin-top: 10px;
+  color: var(--app-muted);
+  font-size: 13px;
+}
+
+.despensa-cartao > .despensa-cartao__faltantes {
+  color: var(--app-text);
+}
+
+.despensa-cartao__acoes {
+  margin-top: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 20px;
+}
+
+.despensa-cartao__acoes .botao {
+  min-height: 40px;
+  padding: 0 15px;
+  font-size: 12px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -1886,6 +2040,28 @@
 
   .lista-compras {
     padding: 16px;
+  }
+
+  .despensa-formulario {
+    padding: 16px;
+  }
+
+  .despensa-resultados {
+    margin-top: 40px;
+  }
+
+  .despensa-resultados__cabecalho {
+    align-items: start;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .despensa-cartao {
+    padding: 16px;
+  }
+
+  .despensa-cartao__cabecalho h2 {
+    font-size: 20px;
   }
 
   .lista-compras__form {

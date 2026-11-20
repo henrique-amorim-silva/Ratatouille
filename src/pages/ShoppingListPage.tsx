@@ -1,16 +1,26 @@
 import { useEffect, useState, type FormEvent } from 'react'
 import { Check, ShoppingBasket, Trash2 } from 'lucide-react'
+import { consolidarListaCompras } from '../domain/shoppingList'
 import { useListaComprasStore } from '../store/listaComprasStore'
 
 export function ShoppingListPage() {
   const [novoItem, setNovoItem] = useState('')
   const [erro, setErro] = useState('')
-  const { itens, carregado, carregarItens, adicionarItem, alternarComprado, removerItem, limparConcluidos } =
-    useListaComprasStore()
+  const {
+    itens,
+    carregado,
+    carregarItens,
+    adicionarItem,
+    alternarComprado,
+    removerItem,
+    limparConcluidos,
+  } = useListaComprasStore()
 
   useEffect(() => {
     void carregarItens().catch((causa: unknown) => {
-      setErro(causa instanceof Error ? causa.message : 'Não foi possível carregar a lista de compras.')
+      setErro(
+        causa instanceof Error ? causa.message : 'Não foi possível carregar a lista de compras.',
+      )
     })
   }, [carregarItens])
 
@@ -34,8 +44,19 @@ export function ShoppingListPage() {
     }
   }
 
-  const pendentes = itens.filter((item) => !item.comprado)
-  const concluidos = itens.filter((item) => item.comprado)
+  const grupos = consolidarListaCompras(itens)
+  const pendentes = grupos.flatMap(({ itens: itensDoGrupo }) =>
+    itensDoGrupo.filter((item) => !item.comprado),
+  )
+  const concluidos = grupos.flatMap(({ itens: itensDoGrupo }) =>
+    itensDoGrupo.filter((item) => item.comprado),
+  )
+
+  async function executarParaIds(ids: string[], acao: (id: string) => Promise<void>) {
+    for (const id of ids) {
+      await acao(id)
+    }
+  }
 
   return (
     <main className="page-main">
@@ -81,32 +102,50 @@ export function ShoppingListPage() {
           <>
             <section aria-labelledby="itens-pendentes">
               <div className="lista-compras__secao">
-                <h2 id="itens-pendentes">Para comprar <span>{pendentes.length}</span></h2>
+                <h2 id="itens-pendentes">
+                  Para comprar <span>{pendentes.length}</span>
+                </h2>
               </div>
               {pendentes.length ? (
-                <ul className="lista-compras__itens">
-                  {pendentes.map((item) => (
-                    <li key={item.id}>
-                      <button
-                        className="lista-compras__check"
-                        type="button"
-                        aria-label={`Marcar ${item.nome} como comprado`}
-                        onClick={() => void executar(() => alternarComprado(item.id))}
-                      >
-                        <Check size={16} aria-hidden="true" />
-                      </button>
-                      <span>{item.nome}</span>
-                      <button
-                        className="lista-compras__remover"
-                        type="button"
-                        aria-label={`Remover ${item.nome}`}
-                        onClick={() => void executar(() => removerItem(item.id))}
-                      >
-                        <Trash2 size={17} aria-hidden="true" />
-                      </button>
-                    </li>
-                  ))}
-                </ul>
+                grupos.map((grupo) => {
+                  const itensDoGrupo = grupo.itens.filter((item) => !item.comprado)
+                  if (itensDoGrupo.length === 0) return null
+
+                  return (
+                    <div className="lista-compras__categoria" key={`pendentes-${grupo.categoria}`}>
+                      <h3>{grupo.categoria}</h3>
+                      <ul className="lista-compras__itens">
+                        {itensDoGrupo.map((item) => (
+                          <li key={item.id}>
+                            <button
+                              className="lista-compras__check"
+                              type="button"
+                              aria-label={`Marcar ${item.nome} como comprado`}
+                              onClick={() =>
+                                void executar(() =>
+                                  executarParaIds(item.idsOriginais, alternarComprado),
+                                )
+                              }
+                            >
+                              <Check size={16} aria-hidden="true" />
+                            </button>
+                            <span>{item.nome}</span>
+                            <button
+                              className="lista-compras__remover"
+                              type="button"
+                              aria-label={`Remover ${item.nome}`}
+                              onClick={() =>
+                                void executar(() => executarParaIds(item.idsOriginais, removerItem))
+                              }
+                            >
+                              <Trash2 size={17} aria-hidden="true" />
+                            </button>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )
+                })
               ) : (
                 <p className="lista-compras__dica">Tudo comprado. Bom preparo!</p>
               )}
@@ -114,7 +153,9 @@ export function ShoppingListPage() {
             {concluidos.length > 0 && (
               <section aria-labelledby="itens-concluidos">
                 <div className="lista-compras__secao">
-                  <h2 id="itens-concluidos">Comprados <span>{concluidos.length}</span></h2>
+                  <h2 id="itens-concluidos">
+                    Comprados <span>{concluidos.length}</span>
+                  </h2>
                   <button
                     className="botao-texto"
                     type="button"
@@ -123,29 +164,45 @@ export function ShoppingListPage() {
                     Limpar
                   </button>
                 </div>
-                <ul className="lista-compras__itens lista-compras__itens--concluidos">
-                  {concluidos.map((item) => (
-                    <li key={item.id}>
-                      <button
-                        className="lista-compras__check lista-compras__check--feito"
-                        type="button"
-                        aria-label={`Desmarcar ${item.nome}`}
-                        onClick={() => void executar(() => alternarComprado(item.id))}
-                      >
-                        <Check size={16} aria-hidden="true" />
-                      </button>
-                      <span>{item.nome}</span>
-                      <button
-                        className="lista-compras__remover"
-                        type="button"
-                        aria-label={`Remover ${item.nome}`}
-                        onClick={() => void executar(() => removerItem(item.id))}
-                      >
-                        <Trash2 size={17} aria-hidden="true" />
-                      </button>
-                    </li>
-                  ))}
-                </ul>
+                {grupos.map((grupo) => {
+                  const itensDoGrupo = grupo.itens.filter((item) => item.comprado)
+                  if (itensDoGrupo.length === 0) return null
+
+                  return (
+                    <div className="lista-compras__categoria" key={`concluidos-${grupo.categoria}`}>
+                      <h3>{grupo.categoria}</h3>
+                      <ul className="lista-compras__itens lista-compras__itens--concluidos">
+                        {itensDoGrupo.map((item) => (
+                          <li key={item.id}>
+                            <button
+                              className="lista-compras__check lista-compras__check--feito"
+                              type="button"
+                              aria-label={`Desmarcar ${item.nome}`}
+                              onClick={() =>
+                                void executar(() =>
+                                  executarParaIds(item.idsOriginais, alternarComprado),
+                                )
+                              }
+                            >
+                              <Check size={16} aria-hidden="true" />
+                            </button>
+                            <span>{item.nome}</span>
+                            <button
+                              className="lista-compras__remover"
+                              type="button"
+                              aria-label={`Remover ${item.nome}`}
+                              onClick={() =>
+                                void executar(() => executarParaIds(item.idsOriginais, removerItem))
+                              }
+                            >
+                              <Trash2 size={17} aria-hidden="true" />
+                            </button>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )
+                })}
               </section>
             )}
           </>
