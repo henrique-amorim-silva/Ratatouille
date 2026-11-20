@@ -5,9 +5,15 @@ import { buscarEFiltrarReceitas } from '../searchAndFilter'
 describe('buscarEFiltrarReceitas', () => {
   it('busca sem diferenciar maiúsculas nem acentos em nome, tags e ingredientes', () => {
     expect(buscarEFiltrarReceitas(receitas, { consulta: 'MOQUECA' })).toHaveLength(1)
-    expect(buscarEFiltrarReceitas(receitas, { consulta: 'fit' })[0]?.id).toBe(
+    expect(buscarEFiltrarReceitas(receitas, { consulta: 'fit' }).map(({ id }) => id)).toEqual([
+      'bolo-de-banana-fit',
       'bowl-fit-de-frango-e-quinoa',
-    )
+      'hamburguer-de-massa-de-pastel',
+      'overnight-oats-de-banana',
+      'pudim-proteico-com-doce-de-leite',
+      'pure-de-couve-flor',
+      'tofu-salteado-com-legumes',
+    ])
     expect(buscarEFiltrarReceitas(receitas, { consulta: 'cenoura' })[0]?.id).toBe(
       'bolo-de-cenoura-com-chocolate',
     )
@@ -27,8 +33,9 @@ describe('buscarEFiltrarReceitas', () => {
     expect(receitas).toEqual(listaOriginal)
   })
 
-  it('encontra as cinco novas receitas pela tag fitness', () => {
+  it('encontra as seis receitas pela tag fitness', () => {
     expect(buscarEFiltrarReceitas(receitas, { consulta: 'fitness' }).map(({ id }) => id)).toEqual([
+      'bolo-de-banana-fit',
       'hamburguer-de-massa-de-pastel',
       'overnight-oats-de-banana',
       'pudim-proteico-com-doce-de-leite',
