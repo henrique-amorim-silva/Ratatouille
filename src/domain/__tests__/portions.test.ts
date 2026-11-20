@@ -9,12 +9,18 @@ if (!bolo) {
 }
 
 describe('ajustarPorcoes', () => {
-  it('escala quantidades e representa frações comuns de forma legível', () => {
+  it('escala quantidades e exibe decimais no formato pt-BR', () => {
     const resultado = ajustarPorcoes(bolo, 5)
     const receitaComQuantidadeFracionada = {
       ...bolo,
       ingredientes: bolo.ingredientes.map((ingrediente) =>
         ingrediente.id === 'farinha' ? { ...ingrediente, quantidade: 1 } : ingrediente,
+      ),
+    }
+    const receitaComVolumeFracionado = {
+      ...bolo,
+      ingredientes: bolo.ingredientes.map((ingrediente) =>
+        ingrediente.id === 'oleo' ? { ...ingrediente, quantidade: 15 } : ingrediente,
       ),
     }
     const resultadoFracionado = ajustarPorcoes(receitaComQuantidadeFracionada, 5)
@@ -32,7 +38,13 @@ describe('ajustarPorcoes', () => {
     })
     expect(resultadoFracionado.ingredientes.find(({ id }) => id === 'farinha')).toMatchObject({
       quantidadeAjustada: 0.5,
-      quantidadeFormatada: '1/2',
+      quantidadeFormatada: '0,5',
+    })
+    expect(
+      ajustarPorcoes(receitaComVolumeFracionado, 5).ingredientes.find(({ id }) => id === 'oleo'),
+    ).toMatchObject({
+      quantidadeAjustada: 7.5,
+      quantidadeFormatada: '7,5',
     })
     expect(
       ajustarPorcoes(receitaComFracaoPequena, 5).ingredientes.find(({ id }) => id === 'farinha'),
