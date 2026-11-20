@@ -448,32 +448,13 @@
 .cartao-receita__capa {
   height: 190px;
   position: relative;
-  display: grid;
-  place-items: center;
   overflow: hidden;
-}
-
-.capa--bolo {
-  background:
-    radial-gradient(circle at 50% 54%, #f6e5c7 0 22%, transparent 22.5%),
-    radial-gradient(circle at 50% 57%, #d89c5f 0 34%, transparent 34.5%), #f2e6d3;
-}
-
-.capa--moqueca {
-  background: radial-gradient(circle at 50% 58%, #e4a654 0 30%, transparent 30.5%), #e8ece0;
-}
-
-.capa--bowl {
-  background: radial-gradient(circle at 50% 58%, #e2d4b8 0 31%, transparent 31.5%), #e4ede3;
-}
-
-.capa--padrao {
   background: #e9eee2;
 }
 
 .cartao-receita__categoria {
   position: absolute;
-  z-index: 1;
+  z-index: 2;
   top: 13px;
   left: 13px;
   padding: 5px 10px;
@@ -485,25 +466,16 @@
   font-weight: 650;
 }
 
-.cartao-receita__emoji {
-  position: relative;
-  z-index: 1;
-  font-size: 85px;
-  filter: drop-shadow(0 8px 4px #28372d25);
-  transform: rotate(-7deg);
+.cartao-receita__imagem {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
   transition: transform 200ms ease;
 }
 
-.cartao-receita:hover .cartao-receita__emoji {
-  transform: rotate(0) scale(1.05);
-}
-
-.cartao-receita__decoracao {
-  position: absolute;
-  right: 23px;
-  bottom: 17px;
-  color: #668258;
-  font-size: 22px;
+.cartao-receita:hover .cartao-receita__imagem {
+  transform: scale(1.05);
 }
 
 .cartao-receita__conteudo {

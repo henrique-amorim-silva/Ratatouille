@@ -9,6 +9,8 @@ As receitas são dados estáticos do frontend. Elas ficam em `src/data/recipes/`
 3. Coloque a imagem em `public/images/receitas/`.
 4. Importe e registre a receita em `src/data/recipes/index.ts`.
 
+As imagens das receitas atuais e suas fontes estão documentadas em [IMAGENS-RECEITAS.md](./IMAGENS-RECEITAS.md).
+
 Exemplo mínimo:
 
 ```ts

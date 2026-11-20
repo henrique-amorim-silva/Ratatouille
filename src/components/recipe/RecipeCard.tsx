@@ -2,12 +2,6 @@ import { ArrowRight, Clock3, Heart, UsersRound } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import type { Receita } from '../../types/recipe'
 
-const capasPorReceita: Record<string, { emoji: string; classe: string }> = {
-  'bolo-de-cenoura-com-chocolate': { emoji: '🍰', classe: 'capa--bolo' },
-  'moqueca-de-banana-da-terra': { emoji: '🍲', classe: 'capa--moqueca' },
-  'bowl-fit-de-frango-e-quinoa': { emoji: '🥗', classe: 'capa--bowl' },
-}
-
 interface RecipeCardProps {
   receita: Receita
   favorita?: boolean
@@ -15,11 +9,20 @@ interface RecipeCardProps {
 }
 
 export function RecipeCard({ receita, favorita, onAlternarFavorito }: RecipeCardProps) {
-  const capa = capasPorReceita[receita.id] ?? { emoji: '🍽️', classe: 'capa--padrao' }
+  const imagem = receita.imagem.startsWith('/')
+    ? `${import.meta.env.BASE_URL}${receita.imagem.slice(1)}`
+    : receita.imagem
 
   return (
     <article className="cartao-receita">
-      <div className={`cartao-receita__capa ${capa.classe}`}>
+      <div className="cartao-receita__capa">
+        <img
+          className="cartao-receita__imagem"
+          src={imagem}
+          alt={receita.titulo}
+          loading="lazy"
+          decoding="async"
+        />
         <span className="cartao-receita__categoria">{receita.categoriaPrincipal}</span>
         {onAlternarFavorito && (
           <button
@@ -32,12 +35,6 @@ export function RecipeCard({ receita, favorita, onAlternarFavorito }: RecipeCard
             <Heart size={17} fill={favorita ? 'currentColor' : 'none'} />
           </button>
         )}
-        <span className="cartao-receita__emoji" aria-hidden="true">
-          {capa.emoji}
-        </span>
-        <span className="cartao-receita__decoracao" aria-hidden="true">
-          ✳
-        </span>
       </div>
       <div className="cartao-receita__conteudo">
         <div className="cartao-receita__detalhes">

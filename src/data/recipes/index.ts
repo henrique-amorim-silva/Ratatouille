@@ -11,6 +11,7 @@ import { hamburguerMassaPastel } from './hamburguerMassaPastel'
 import { pureDeCouveFlor } from './pureDeCouveFlor'
 import { overnightOatsBanana } from './overnightOatsBanana'
 import { tofuSalteadoLegumes } from './tofuSalteadoLegumes'
+import { boloDeBananaFit } from './boloDeBananaFit'
 
 export const receitas = [
   boloDeCenoura,
@@ -25,4 +26,5 @@ export const receitas = [
   pureDeCouveFlor,
   overnightOatsBanana,
   tofuSalteadoLegumes,
+  boloDeBananaFit,
 ].map((receita) => recipeSchema.parse(receita))
