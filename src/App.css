@@ -1867,6 +1867,288 @@
   font-size: 12px;
 }
 
+.botao--modo-preparo {
+  min-height: 41px;
+  margin: 15px 0 0;
+  padding: 0 15px;
+  border-radius: 10px;
+  font-size: 12px;
+}
+
+.modo-preparo,
+.conversor-medidas {
+  width: min(760px, 100%);
+  margin: 0 auto;
+  padding: clamp(22px, 5vw, 42px);
+  border: 1px solid var(--app-border);
+  border-radius: 19px;
+  background: var(--app-surface);
+  box-shadow: 0 14px 40px #28372d0a;
+}
+
+.modo-preparo__cabecalho {
+  text-align: center;
+}
+
+.modo-preparo__cabecalho .sobretitulo {
+  margin-bottom: 9px;
+}
+
+.modo-preparo__cabecalho h1 {
+  max-width: 650px;
+  margin: 0 auto;
+  color: var(--app-text);
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(30px, 5vw, 42px);
+  font-weight: 500;
+  letter-spacing: -1px;
+  line-height: 1.15;
+}
+
+.modo-preparo__cabecalho > p:last-child {
+  margin-top: 12px;
+  color: var(--app-muted);
+  font-size: 13px;
+}
+
+.modo-preparo__wake-lock {
+  margin-top: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px 13px;
+}
+
+.modo-preparo__wake-lock p {
+  color: var(--app-muted);
+  font-size: 11px;
+}
+
+.modo-preparo__wake-lock button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.modo-preparo__etapa {
+  margin-top: 31px;
+  padding: 24px;
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr);
+  align-items: start;
+  gap: 17px;
+  border-radius: 15px;
+  background: #f0f2e7;
+}
+
+.modo-preparo__numero,
+.modo-preparo__icone-conclusao {
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #dce7d7;
+  color: var(--app-green);
+  font-weight: 700;
+}
+
+.modo-preparo__etapa h2,
+.modo-preparo__conclusao h2 {
+  margin: 0 0 9px;
+  color: var(--app-text);
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.modo-preparo__etapa p {
+  color: #59665a;
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+.modo-preparo__ingredientes {
+  margin-top: 22px;
+}
+
+.modo-preparo__ingredientes h3 {
+  margin: 0 0 8px;
+  color: var(--app-text);
+  font-size: 13px;
+}
+
+.modo-preparo__ingredientes ul {
+  margin: 0;
+  padding-left: 20px;
+  color: var(--app-muted);
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.temporizador-cozinha {
+  margin-top: 23px;
+  padding: 17px 19px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px;
+  border: 1px solid var(--app-border);
+  border-radius: 13px;
+}
+
+.temporizador-cozinha .sobretitulo {
+  margin-bottom: 3px;
+  font-size: 9px;
+}
+
+.temporizador-cozinha__tempo {
+  color: var(--app-text);
+  font-variant-numeric: tabular-nums;
+  font-size: 25px;
+  font-weight: 650;
+}
+
+.temporizador-cozinha__acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.temporizador-cozinha__acoes .botao {
+  min-height: 38px;
+  border-radius: 9px;
+}
+
+.temporizador-cozinha__acoes .botao:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.modo-preparo__navegacao {
+  margin-top: 28px;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.modo-preparo__navegacao .botao {
+  min-height: 44px;
+  border-radius: 11px;
+}
+
+.modo-preparo__navegacao .botao:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.modo-preparo__conclusao {
+  min-height: 270px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 12px;
+  text-align: center;
+}
+
+.modo-preparo__conclusao h2 {
+  margin-bottom: 3px;
+}
+
+.conversor-medidas {
+  display: grid;
+  gap: 20px;
+}
+
+.conversor-medidas label {
+  min-width: 0;
+  display: grid;
+  gap: 7px;
+  color: var(--app-text);
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.conversor-medidas input,
+.conversor-medidas select {
+  width: 100%;
+  min-width: 0;
+  min-height: 47px;
+  padding: 0 12px;
+  border: 1px solid var(--app-border);
+  border-radius: 9px;
+  outline-color: var(--app-green);
+  background: var(--app-bg);
+  color: var(--app-text);
+  font-size: 13px;
+}
+
+.conversor-medidas__linha {
+  display: grid;
+  grid-template-columns: minmax(90px, 1fr) minmax(120px, 1fr) 42px minmax(120px, 1fr);
+  align-items: end;
+  gap: 10px;
+}
+
+.conversor-medidas__trocar {
+  width: 42px;
+  height: 47px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--app-border);
+  border-radius: 9px;
+  background: transparent;
+  color: var(--app-green);
+  cursor: pointer;
+}
+
+.conversor-medidas__resultado {
+  min-height: 95px;
+  padding: 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border-radius: 12px;
+  background: #f0f2e7;
+  color: var(--app-green);
+}
+
+.conversor-medidas__resultado .sobretitulo {
+  margin-bottom: 1px;
+  font-size: 9px;
+}
+
+.conversor-medidas__resultado output {
+  color: var(--app-text);
+  font-size: 23px;
+  font-weight: 650;
+}
+
+.aviso-conversao {
+  margin: -8px 0 0;
+  padding: 12px 14px;
+  border-radius: 9px;
+  background: #fff3da;
+  color: #74521c;
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.aviso-conversao--incerto {
+  border: 1px solid #e8c780;
+  background: #fff0ec;
+  color: #8b3328;
+  font-weight: 600;
+}
+
+.conversor-medidas__nota {
+  color: var(--app-muted);
+  font-size: 11px;
+  line-height: 1.6;
+}
+
 @media (prefers-color-scheme: dark) {
   .navegacao__link:hover,
   .navegacao__link--ativo,
@@ -1892,6 +2174,32 @@
   }
 
   .mensagem-erro {
+    background: #452b27;
+    color: #ffb4a7;
+  }
+
+  .modo-preparo__etapa,
+  .conversor-medidas__resultado {
+    background: #273128;
+  }
+
+  .modo-preparo__numero,
+  .modo-preparo__icone-conclusao {
+    background: #344435;
+    color: #d1e0c9;
+  }
+
+  .modo-preparo__etapa p {
+    color: #c1c9be;
+  }
+
+  .aviso-conversao {
+    background: #403925;
+    color: #f0d99c;
+  }
+
+  .aviso-conversao--incerto {
+    border-color: #75463e;
     background: #452b27;
     color: #ffb4a7;
   }
@@ -2071,6 +2379,59 @@
 
   .lista-compras__form .botao {
     min-height: 44px;
+  }
+
+  .modo-preparo,
+  .conversor-medidas {
+    padding: 20px 16px;
+    border-radius: 15px;
+  }
+
+  .modo-preparo__etapa {
+    padding: 18px 15px;
+    grid-template-columns: 38px minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .modo-preparo__numero {
+    width: 38px;
+    height: 38px;
+  }
+
+  .modo-preparo__etapa h2 {
+    font-size: 21px;
+  }
+
+  .modo-preparo__etapa p {
+    font-size: 14px;
+  }
+
+  .temporizador-cozinha {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .temporizador-cozinha__acoes {
+    width: 100%;
+  }
+
+  .temporizador-cozinha__acoes .botao {
+    flex: 1;
+  }
+
+  .modo-preparo__navegacao .botao {
+    min-width: 0;
+    padding: 0 13px;
+    font-size: 12px;
+  }
+
+  .conversor-medidas__linha {
+    grid-template-columns: minmax(85px, 0.8fr) minmax(0, 1fr) 38px minmax(0, 1fr);
+    gap: 7px;
+  }
+
+  .conversor-medidas__trocar {
+    width: 38px;
   }
 
   .rodape {

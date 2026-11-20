@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { ArrowLeft, Heart, Minus, Plus, ShoppingBasket, UsersRound } from 'lucide-react'
+import { ArrowLeft, CookingPot, Heart, Minus, Plus, ShoppingBasket, UsersRound } from 'lucide-react'
 import { Link, useParams } from 'react-router-dom'
 import { receitas } from '../data/recipes'
 import { ajustarPorcoes } from '../domain/portions'
@@ -30,7 +30,9 @@ function RecipeDetailContent({ receita }: { receita: (typeof receitas)[number] }
         await adicionarItem(`${quantidade}${ingrediente.nome}`)
       }
     } catch (causa) {
-      setErro(causa instanceof Error ? causa.message : 'Não foi possível atualizar a lista de compras.')
+      setErro(
+        causa instanceof Error ? causa.message : 'Não foi possível atualizar a lista de compras.',
+      )
     } finally {
       setAdicionando(false)
     }
@@ -144,6 +146,9 @@ function RecipeDetailContent({ receita }: { receita: (typeof receitas)[number] }
           <section className="painel-preparo">
             <p className="sobretitulo">MODO DE PREPARO</p>
             <h2>Vamos cozinhar</h2>
+            <Link className="botao botao--modo-preparo" to={`/receitas/${receita.slug}/preparo`}>
+              <CookingPot size={17} aria-hidden="true" /> Iniciar preparo passo a passo
+            </Link>
             <ol className="lista-etapas">
               {receita.etapas.map((etapa) => (
                 <li key={etapa.numero}>
