@@ -1,0 +1,150 @@
+import type { Receita } from '../../types/recipe'
+
+export const bowlDeQuinoa = {
+  id: 'bowl-fit-de-frango-e-quinoa',
+  slug: 'bowl-fit-de-frango-e-quinoa',
+  titulo: 'Bowl de frango, quinoa e legumes',
+  descricaoCurta: 'Bowl leve de quinoa com frango grelhado, vegetais frescos e limão.',
+  descricaoCompleta:
+    'Uma refeição prática com quinoa cozida, frango grelhado e vegetais frescos. O molho simples de limão e mostarda é servido sobre o bowl pouco antes de comer.',
+  imagem: '/images/receitas/bowl-de-frango-e-quinoa.jpg',
+  categoriaPrincipal: 'Pratos principais',
+  categorias: ['Pratos principais', 'Saudáveis'],
+  subcategorias: ['Bowls', 'Alto em proteínas'],
+  tags: ['fit', 'frango', 'quinoa', 'leve', 'alto em proteínas'],
+  dificuldade: 'fácil',
+  tempos: {
+    preparoMinutos: 15,
+    cozimentoMinutos: 20,
+    totalMinutos: 35,
+  },
+  rendimentoBase: 2,
+  rendimentoLabel: '2 porções',
+  ingredientes: [
+    {
+      id: 'quinoa',
+      nome: 'quinoa em grãos',
+      quantidade: 120,
+      unidade: 'g',
+      opcional: false,
+      indivisivel: false,
+    },
+    {
+      id: 'agua',
+      nome: 'água para cozinhar a quinoa',
+      quantidade: 240,
+      unidade: 'ml',
+      opcional: false,
+      indivisivel: false,
+    },
+    {
+      id: 'frango',
+      nome: 'filé de peito de frango',
+      quantidade: 300,
+      unidade: 'g',
+      opcional: false,
+      indivisivel: false,
+    },
+    {
+      id: 'azeite',
+      nome: 'azeite de oliva',
+      quantidade: 15,
+      unidade: 'ml',
+      opcional: false,
+      indivisivel: false,
+    },
+    {
+      id: 'tomate-cereja',
+      nome: 'tomates-cereja cortados ao meio',
+      quantidade: 150,
+      unidade: 'g',
+      opcional: false,
+      indivisivel: false,
+    },
+    {
+      id: 'pepino',
+      nome: 'pepino em cubos',
+      quantidade: 120,
+      unidade: 'g',
+      opcional: false,
+      indivisivel: false,
+    },
+    {
+      id: 'rucula',
+      nome: 'rúcula',
+      quantidade: 40,
+      unidade: 'g',
+      opcional: false,
+      indivisivel: false,
+    },
+    {
+      id: 'limao',
+      nome: 'suco de limão',
+      quantidade: 1,
+      unidade: 'unidade',
+      opcional: false,
+      indivisivel: true,
+    },
+    {
+      id: 'mostarda',
+      nome: 'mostarda',
+      quantidade: 5,
+      unidade: 'g',
+      opcional: false,
+      indivisivel: false,
+    },
+    {
+      id: 'sal',
+      nome: 'sal e pimenta-do-reino',
+      quantidade: null,
+      unidade: 'a gosto',
+      opcional: false,
+      indivisivel: false,
+    },
+  ],
+  etapas: [
+    {
+      numero: 1,
+      titulo: 'Cozinhe a quinoa',
+      descricao:
+        'Lave a quinoa em água corrente. Coloque em uma panela com a água e uma pitada de sal; cozinhe em fogo baixo por cerca de 15 minutos, até ficar macia e a água secar.',
+      tempoMinutos: 15,
+      ingredientesVinculados: ['quinoa', 'agua', 'sal'],
+    },
+    {
+      numero: 2,
+      titulo: 'Grelhe o frango',
+      descricao:
+        'Tempere o frango com sal e pimenta. Aqueça metade do azeite em uma frigideira e grelhe os filés por 5 a 7 minutos de cada lado, até estarem cozidos por dentro. Fatie após descansar por 3 minutos.',
+      ingredientesVinculados: ['frango', 'azeite', 'sal'],
+    },
+    {
+      numero: 3,
+      titulo: 'Prepare o molho',
+      descricao:
+        'Misture o suco de limão, a mostarda e o restante do azeite até formar um molho homogêneo.',
+      ingredientesVinculados: ['limao', 'mostarda', 'azeite'],
+    },
+    {
+      numero: 4,
+      titulo: 'Monte os bowls',
+      descricao:
+        'Divida a quinoa entre duas tigelas. Acrescente o frango fatiado, o tomate, o pepino e a rúcula. Regue com o molho na hora de servir.',
+      ingredientesVinculados: ['quinoa', 'frango', 'tomate-cereja', 'pepino', 'rucula'],
+    },
+  ],
+  dicas: [
+    'Enxágue bem a quinoa antes de cozinhar para suavizar seu sabor.',
+    'Para adiantar a refeição, cozinhe a quinoa com antecedência e conserve refrigerada.',
+  ],
+  substituicoes: [
+    {
+      ingrediente: 'frango',
+      substituto: 'grão-de-bico cozido',
+      observacao: 'Use cerca de 240 g para uma versão vegetariana.',
+    },
+  ],
+  restricoesAlimentares: ['sem lactose'],
+  tipoRefeicao: 'almoço',
+  ocasioes: ['almoço rápido', 'marmita', 'jantar leve'],
+} satisfies Receita
