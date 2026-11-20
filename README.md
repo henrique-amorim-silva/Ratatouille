@@ -22,8 +22,10 @@ Validação:
 
 ```sh
 npm run test:run
+npm run test:e2e
 npm run lint
 npm run build
+npx tsc --noEmit
 ```
 
 O backup inclui favoritos, preferências, lista de compras, planejamento, histórico e anotações.
