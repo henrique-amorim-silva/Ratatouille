@@ -7,6 +7,8 @@ import { HomePage } from '../pages/HomePage'
 import { PantryMatchPage } from '../pages/PantryMatchPage'
 import { RecipeDetailPage } from '../pages/RecipeDetailPage'
 import { ShoppingListPage } from '../pages/ShoppingListPage'
+import { MealPlannerPage } from '../pages/MealPlannerPage'
+import { BackupPage } from '../pages/BackupPage'
 import { CookingModeView } from '../components/kitchen/CookingModeView'
 import { receitas } from '../data/recipes'
 import { useParams } from 'react-router-dom'
@@ -31,6 +33,8 @@ export function AppRoutes() {
         <Route path="receitas/:slug/preparo" element={<CookingModeRoute />} />
         <Route path="favoritos" element={<FavoritesPage />} />
         <Route path="lista-de-compras" element={<ShoppingListPage />} />
+        <Route path="planejamento" element={<MealPlannerPage />} />
+        <Route path="backup" element={<BackupPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Route>
     </Routes>

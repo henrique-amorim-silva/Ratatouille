@@ -1,8 +1,24 @@
-import { useState } from 'react'
-import { ArrowLeft, CookingPot, Heart, Minus, Plus, ShoppingBasket, UsersRound } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import {
+  ArrowLeft,
+  CookingPot,
+  Heart,
+  Minus,
+  Plus,
+  ShoppingBasket,
+  StickyNote,
+  UsersRound,
+} from 'lucide-react'
 import { Link, useParams } from 'react-router-dom'
 import { receitas } from '../data/recipes'
 import { ajustarPorcoes } from '../domain/portions'
+import {
+  listarHistoricoPreparos,
+  obterAnotacaoReceita,
+  registrarPreparo,
+  salvarAnotacaoReceita,
+  type PreparoRealizado,
+} from '../services/storage'
 import { useFavoritosStore } from '../store/favoritosStore'
 import { useListaComprasStore } from '../store/listaComprasStore'
 
@@ -11,6 +27,11 @@ function RecipeDetailContent({ receita }: { receita: (typeof receitas)[number] }
   const [ingredientesDisponiveis, setIngredientesDisponiveis] = useState<string[]>([])
   const [erro, setErro] = useState('')
   const [adicionando, setAdicionando] = useState(false)
+  const [anotacao, setAnotacao] = useState('')
+  const [historico, setHistorico] = useState<PreparoRealizado[]>([])
+  const [carregandoMemoria, setCarregandoMemoria] = useState(true)
+  const [salvandoAnotacao, setSalvandoAnotacao] = useState(false)
+  const [mensagemMemoria, setMensagemMemoria] = useState('')
   const favorito = useFavoritosStore((estado) => estado.favoritos.includes(receita.id))
   const alternarFavorito = useFavoritosStore((estado) => estado.alternarFavorito)
   const adicionarItem = useListaComprasStore((estado) => estado.adicionarItem)
@@ -18,6 +39,29 @@ function RecipeDetailContent({ receita }: { receita: (typeof receitas)[number] }
   const faltantes = ajuste.ingredientes.filter(
     (ingrediente) => !ingredientesDisponiveis.includes(ingrediente.id),
   )
+
+  useEffect(() => {
+    let ativo = true
+    void Promise.all([obterAnotacaoReceita(receita.id), listarHistoricoPreparos(receita.id)])
+      .then(([anotacaoSalva, preparos]) => {
+        if (ativo) {
+          setAnotacao(anotacaoSalva?.texto ?? '')
+          setHistorico(preparos)
+          setCarregandoMemoria(false)
+        }
+      })
+      .catch((causa: unknown) => {
+        if (ativo) {
+          setErro(
+            causa instanceof Error ? causa.message : 'Não foi possível carregar suas anotações.',
+          )
+          setCarregandoMemoria(false)
+        }
+      })
+    return () => {
+      ativo = false
+    }
+  }, [receita.id])
 
   async function adicionarFaltantes() {
     setErro('')
@@ -35,6 +79,45 @@ function RecipeDetailContent({ receita }: { receita: (typeof receitas)[number] }
       )
     } finally {
       setAdicionando(false)
+    }
+  }
+
+  async function salvarAnotacao() {
+    setErro('')
+    setMensagemMemoria('')
+    setSalvandoAnotacao(true)
+    try {
+      await salvarAnotacaoReceita({
+        receitaId: receita.id,
+        texto: anotacao,
+        atualizadaEm: new Date().toISOString(),
+      })
+      setMensagemMemoria(
+        anotacao.trim() ? 'Anotação salva neste dispositivo.' : 'Anotação removida.',
+      )
+    } catch (causa: unknown) {
+      setErro(causa instanceof Error ? causa.message : 'Não foi possível salvar a anotação.')
+    } finally {
+      setSalvandoAnotacao(false)
+    }
+  }
+
+  async function registrarPreparoAtual() {
+    setErro('')
+    setMensagemMemoria('')
+    const preparo: PreparoRealizado = {
+      id: crypto.randomUUID(),
+      receitaId: receita.id,
+      preparadoEm: new Date().toISOString(),
+    }
+    try {
+      await registrarPreparo(preparo)
+      setHistorico((atuais) =>
+        [preparo, ...atuais].sort((a, b) => b.preparadoEm.localeCompare(a.preparadoEm)),
+      )
+      setMensagemMemoria('Preparo registrado no seu histórico.')
+    } catch (causa: unknown) {
+      setErro(causa instanceof Error ? causa.message : 'Não foi possível registrar o preparo.')
     }
   }
 
@@ -168,6 +251,70 @@ function RecipeDetailContent({ receita }: { receita: (typeof receitas)[number] }
             )}
           </section>
         </div>
+        <section className="receita-memoria" aria-labelledby="memoria-receita-titulo">
+          <div className="receita-memoria__cabecalho">
+            <div>
+              <p className="sobretitulo">SEU CADERNO CULINÁRIO</p>
+              <h2 id="memoria-receita-titulo">Anotações e histórico</h2>
+            </div>
+            <button
+              className="botao botao--secundario"
+              type="button"
+              disabled={carregandoMemoria}
+              onClick={() => void registrarPreparoAtual()}
+            >
+              <CookingPot size={17} aria-hidden="true" /> Registrar preparo
+            </button>
+          </div>
+          <label className="receita-memoria__anotacao" htmlFor="anotacao-receita">
+            <span>
+              <StickyNote size={16} aria-hidden="true" /> Suas observações
+            </span>
+            <textarea
+              id="anotacao-receita"
+              rows={4}
+              placeholder="Ex.: reduzir o açúcar na próxima vez..."
+              value={anotacao}
+              disabled={carregandoMemoria}
+              onChange={(evento) => setAnotacao(evento.target.value)}
+            />
+          </label>
+          <div className="receita-memoria__rodape">
+            <button
+              className="botao botao--secundario"
+              type="button"
+              disabled={carregandoMemoria || salvandoAnotacao}
+              onClick={() => void salvarAnotacao()}
+            >
+              {salvandoAnotacao ? 'Salvando...' : 'Salvar anotação'}
+            </button>
+            {mensagemMemoria && <p role="status">{mensagemMemoria}</p>}
+          </div>
+          <div className="receita-memoria__historico">
+            <h3>Preparos realizados</h3>
+            {carregandoMemoria ? (
+              <p role="status">Carregando...</p>
+            ) : historico.length ? (
+              <ul>
+                {historico.map((preparo) => (
+                  <li key={preparo.id}>
+                    {new Intl.DateTimeFormat('pt-BR', {
+                      dateStyle: 'long',
+                      timeStyle: 'short',
+                    }).format(new Date(preparo.preparadoEm))}
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p>Seus preparos registrados aparecerão aqui.</p>
+            )}
+          </div>
+          {erro && (
+            <p className="mensagem-erro" role="alert">
+              {erro}
+            </p>
+          )}
+        </section>
       </article>
     </main>
   )
@@ -190,5 +337,5 @@ export function RecipeDetailPage() {
     )
   }
 
-  return <RecipeDetailContent receita={receita} />
+  return <RecipeDetailContent key={receita.id} receita={receita} />
 }
