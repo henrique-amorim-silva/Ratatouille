@@ -1,0 +1,125 @@
+import type { Receita } from '../../types/recipe'
+
+export const paoDeBatataNaAirFryer = {
+  id: 'pao-de-batata-na-air-fryer',
+  slug: 'pao-de-batata-na-air-fryer',
+  titulo: 'Pão de batata na air fryer',
+  descricaoCurta: 'Pãezinhos macios com recheio de queijo, dourados na air fryer.',
+  descricaoCompleta:
+    'Pãezinhos de batata fáceis de montar, com massa macia e queijo derretido no centro. Ficam dourados por fora e ainda macios por dentro.',
+  imagem: '/images/receitas/pao-de-batata-na-air-fryer.jpg',
+  categoriaPrincipal: 'Lanches',
+  categorias: ['Lanches', 'Pães', 'Air fryer'],
+  subcategorias: ['Air fryer', 'Batata'],
+  tags: ['pão de batata', 'air fryer', 'queijo', 'lanche'],
+  dificuldade: 'média',
+  tempos: { preparoMinutos: 25, cozimentoMinutos: 18, totalMinutos: 43 },
+  rendimentoBase: 8,
+  rendimentoLabel: '8 unidades',
+  ingredientes: [
+    {
+      id: 'batata',
+      nome: 'batata cozida e amassada',
+      quantidade: 250,
+      unidade: 'g',
+      opcional: false,
+      indivisivel: false,
+    },
+    {
+      id: 'farinha',
+      nome: 'farinha de trigo',
+      quantidade: 220,
+      unidade: 'g',
+      opcional: false,
+      indivisivel: false,
+    },
+    {
+      id: 'ovo',
+      nome: 'ovo',
+      quantidade: 1,
+      unidade: 'unidade',
+      opcional: false,
+      indivisivel: true,
+    },
+    {
+      id: 'manteiga',
+      nome: 'manteiga derretida',
+      quantidade: 30,
+      unidade: 'g',
+      opcional: false,
+      indivisivel: false,
+    },
+    {
+      id: 'leite',
+      nome: 'leite',
+      quantidade: 60,
+      unidade: 'ml',
+      opcional: false,
+      indivisivel: false,
+    },
+    {
+      id: 'fermento',
+      nome: 'fermento em pó',
+      quantidade: 8,
+      unidade: 'g',
+      opcional: false,
+      indivisivel: false,
+    },
+    {
+      id: 'queijo',
+      nome: 'queijo mussarela em cubos',
+      quantidade: 120,
+      unidade: 'g',
+      opcional: false,
+      indivisivel: false,
+    },
+    {
+      id: 'sal',
+      nome: 'sal',
+      quantidade: null,
+      unidade: 'a gosto',
+      opcional: false,
+      indivisivel: false,
+    },
+  ],
+  etapas: [
+    {
+      numero: 1,
+      titulo: 'Prepare a massa',
+      descricao:
+        'Misture a batata amassada, o ovo, a manteiga e o leite. Acrescente a farinha, o fermento e o sal até formar uma massa macia.',
+      tempoMinutos: 10,
+      ingredientesVinculados: ['batata', 'ovo', 'manteiga', 'leite', 'farinha', 'fermento', 'sal'],
+    },
+    {
+      numero: 2,
+      titulo: 'Recheie os pães',
+      descricao:
+        'Divida a massa em oito porções. Abra cada porção na mão, coloque um cubo de queijo no centro e feche bem.',
+      tempoMinutos: 10,
+      ingredientesVinculados: ['queijo'],
+    },
+    {
+      numero: 3,
+      titulo: 'Asse na air fryer',
+      descricao:
+        'Disponha os pães na cesta, deixando espaço entre eles. Asse a 180 °C por 15 a 18 minutos, virando uma vez, até dourarem.',
+      tempoMinutos: 18,
+      ingredientesVinculados: [],
+    },
+  ],
+  dicas: [
+    'Não deixe a cesta muito cheia; asse em duas levas se necessário.',
+    'Sirva imediatamente para aproveitar o queijo derretido.',
+  ],
+  substituicoes: [
+    {
+      ingrediente: 'queijo mussarela',
+      substituto: 'queijo prato ou requeijão',
+      observacao: 'Corte em porções pequenas para não abrir durante o cozimento.',
+    },
+  ],
+  restricoesAlimentares: ['vegetariana'],
+  tipoRefeicao: 'lanche',
+  ocasioes: ['lanche da tarde', 'café da manhã'],
+} satisfies Receita

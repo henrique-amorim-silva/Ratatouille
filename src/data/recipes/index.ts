@@ -12,6 +12,11 @@ import { pureDeCouveFlor } from './pureDeCouveFlor'
 import { overnightOatsBanana } from './overnightOatsBanana'
 import { tofuSalteadoLegumes } from './tofuSalteadoLegumes'
 import { boloDeBananaFit } from './boloDeBananaFit'
+import { paoDeBatataNaAirFryer } from './paoDeBatataNaAirFryer'
+import { pizzaNaAirFryer } from './pizzaNaAirFryer'
+import { nuggetsFitCaseiro } from './nuggetsFitCaseiro'
+import { batataRusticaNaAirFryer } from './batataRusticaNaAirFryer'
+import { couveFlorEmpanadaNaAirFryer } from './couveFlorEmpanadaNaAirFryer'
 
 export const receitas = [
   boloDeCenoura,
@@ -27,4 +32,9 @@ export const receitas = [
   overnightOatsBanana,
   tofuSalteadoLegumes,
   boloDeBananaFit,
+  paoDeBatataNaAirFryer,
+  pizzaNaAirFryer,
+  nuggetsFitCaseiro,
+  batataRusticaNaAirFryer,
+  couveFlorEmpanadaNaAirFryer,
 ].map((receita) => recipeSchema.parse(receita))

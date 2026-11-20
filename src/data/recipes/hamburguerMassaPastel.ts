@@ -9,7 +9,7 @@ export const hamburguerMassaPastel = {
     'Hambúrgueres de carne magra fritos na frigideira antes de serem envolvidos em discos de massa de pastel e finalizados na air fryer. O queijo é opcional.',
   imagem: '/images/receitas/hamburguer-massa-pastel.jpg',
   categoriaPrincipal: 'Lanches',
-  categorias: ['Lanches', 'Saudáveis'],
+  categorias: ['Lanches', 'Saudáveis', 'Air fryer'],
   subcategorias: ['Air fryer', 'Proteicos'],
   tags: ['fit', 'fitness', 'hambúrguer', 'massa de pastel', 'air fryer'],
   dificuldade: 'fácil',

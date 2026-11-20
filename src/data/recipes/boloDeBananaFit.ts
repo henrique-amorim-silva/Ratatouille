@@ -9,7 +9,7 @@ export const boloDeBananaFit = {
     'Um bolo prático feito apenas com banana, farinha de aveia, ovo e fermento em pó. Duas bananas entram na massa e a terceira vai em rodelas por cima.',
   imagem: '/images/receitas/bolo-de-banana-fit.jpg',
   categoriaPrincipal: 'Bolos',
-  categorias: ['Bolos', 'Lanches', 'Saudáveis', 'Vegetarianas','Sobremesas'],
+  categorias: ['Bolos', 'Lanches', 'Saudáveis', 'Vegetarianas', 'Sobremesas', 'Air fryer'],
   subcategorias: ['Bolos simples', 'Sem açúcar adicionado'],
   tags: ['fit', 'fitness', 'banana', 'aveia', 'lanche'],
   dificuldade: 'fácil',
