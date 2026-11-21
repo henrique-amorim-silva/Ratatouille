@@ -44,7 +44,10 @@ test('exibe as novas opções fitness ao buscar pela categoria', async ({ page }
   await page.goto('/receitas')
   await page.getByRole('searchbox', { name: 'Buscar receitas ou ingredientes' }).fill('fitness')
 
-  await expect(page.getByText('5 receitas encontradas')).toBeVisible()
+  await expect(page.getByText('6 receitas encontradas')).toBeVisible()
+  await expect(
+    page.getByRole('heading', { name: 'Bolo de banana fit com 4 ingredientes' }),
+  ).toBeVisible()
   await expect(page.getByRole('heading', { name: 'Pudim proteico individual' })).toBeVisible()
   await expect(
     page.getByRole('heading', { name: 'Hambúrguer de massa de pastel na air fryer' }),
