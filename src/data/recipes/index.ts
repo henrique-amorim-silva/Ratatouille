@@ -17,6 +17,9 @@ import { pizzaNaAirFryer } from './pizzaNaAirFryer'
 import { nuggetsFitCaseiro } from './nuggetsFitCaseiro'
 import { batataRusticaNaAirFryer } from './batataRusticaNaAirFryer'
 import { couveFlorEmpanadaNaAirFryer } from './couveFlorEmpanadaNaAirFryer'
+import { nhoqueComMolhoDeQueijo } from './nhoqueComMolhoDeQueijo'
+import { nhoqueTradicional } from './nhoqueTradicional'
+import { arrozDeFraldinha } from './arrozDeFraldinha'
 
 export const receitas = [
   boloDeCenoura,
@@ -37,4 +40,7 @@ export const receitas = [
   nuggetsFitCaseiro,
   batataRusticaNaAirFryer,
   couveFlorEmpanadaNaAirFryer,
+  nhoqueComMolhoDeQueijo,
+  nhoqueTradicional,
+  arrozDeFraldinha,
 ].map((receita) => recipeSchema.parse(receita))

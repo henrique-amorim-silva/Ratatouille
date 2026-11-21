@@ -30,6 +30,11 @@ export const DENSIDADES_CONHECIDAS: readonly DensidadeIngrediente[] = [
   { nome: 'cacau em pó', aliases: ['cacau', 'chocolate em pó'], gramasPorMl: 0.52 },
   { nome: 'aveia', aliases: ['aveia'], gramasPorMl: 0.4 },
   {
+    nome: 'doce de leite',
+    aliases: ['doce de leite', 'doce-de-leite'],
+    gramasPorMl: 1.3,
+  },
+  {
     nome: 'creme de leite',
     aliases: ['creme de leite'],
     gramasPorMl: 1.01,

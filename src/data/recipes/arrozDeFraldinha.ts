@@ -1,0 +1,151 @@
+import type { Receita } from '../../types/recipe'
+
+export const arrozDeFraldinha = {
+  id: 'arroz-de-fraldinha',
+  slug: 'arroz-de-fraldinha',
+  titulo: 'Arroz de fraldinha',
+  descricaoCurta: 'Arroz soltinho cozido com fraldinha desfiada, tomate e temperos.',
+  descricaoCompleta:
+    'Prato único de arroz preparado no caldo do cozimento da fraldinha, que fica macia e desfiada. Sirva bem quente, acompanhado de cheiro-verde.',
+  imagem: '/images/receitas/arroz-de-fraldinha.jpg',
+  categoriaPrincipal: 'Pratos principais',
+  categorias: ['Pratos principais', 'Carnes'],
+  subcategorias: ['Arroz', 'Carne bovina'],
+  tags: ['arroz', 'fraldinha', 'carne bovina', 'prato único'],
+  dificuldade: 'média',
+  tempos: {
+    preparoMinutos: 20,
+    cozimentoMinutos: 60,
+    totalMinutos: 80,
+  },
+  rendimentoBase: 6,
+  rendimentoLabel: '6 porções',
+  ingredientes: [
+    {
+      id: 'fraldinha',
+      nome: 'fraldinha em pedaços grandes',
+      quantidade: 700,
+      unidade: 'g',
+      opcional: false,
+      indivisivel: false,
+    },
+    {
+      id: 'agua',
+      nome: 'água',
+      quantidade: 1.5,
+      unidade: 'l',
+      opcional: false,
+      indivisivel: false,
+    },
+    {
+      id: 'oleo',
+      nome: 'óleo ou azeite',
+      quantidade: 15,
+      unidade: 'ml',
+      opcional: false,
+      indivisivel: false,
+    },
+    {
+      id: 'cebola',
+      nome: 'cebola picada',
+      quantidade: 1,
+      unidade: 'unidade',
+      opcional: false,
+      indivisivel: true,
+    },
+    {
+      id: 'alho',
+      nome: 'dentes de alho picados',
+      quantidade: 3,
+      unidade: 'unidades',
+      opcional: false,
+      indivisivel: true,
+    },
+    {
+      id: 'tomate',
+      nome: 'tomates picados',
+      quantidade: 2,
+      unidade: 'unidades',
+      opcional: false,
+      indivisivel: true,
+    },
+    {
+      id: 'arroz',
+      nome: 'arroz',
+      quantidade: 400,
+      unidade: 'g',
+      opcional: false,
+      indivisivel: false,
+    },
+    {
+      id: 'paprica',
+      nome: 'páprica defumada',
+      quantidade: 3,
+      unidade: 'g',
+      opcional: true,
+      indivisivel: false,
+    },
+    {
+      id: 'sal-pimenta',
+      nome: 'sal e pimenta-do-reino',
+      quantidade: null,
+      unidade: 'a gosto',
+      opcional: false,
+      indivisivel: false,
+    },
+    {
+      id: 'cheiro-verde',
+      nome: 'cheiro-verde picado',
+      quantidade: 15,
+      unidade: 'g',
+      opcional: true,
+      indivisivel: false,
+    },
+  ],
+  etapas: [
+    {
+      numero: 1,
+      titulo: 'Cozinhe a fraldinha',
+      descricao:
+        'Coloque a fraldinha em uma panela de pressão com a água e metade da cebola. Cozinhe por cerca de 35 minutos após pegar pressão, até ficar macia. Reserve a carne e o caldo. Desfie a carne quando amornar.',
+      tempoMinutos: 35,
+      ingredientesVinculados: ['fraldinha', 'agua', 'cebola'],
+    },
+    {
+      numero: 2,
+      titulo: 'Refogue os temperos e a carne',
+      descricao:
+        'Aqueça o óleo em uma panela grande. Refogue o restante da cebola e o alho. Junte o tomate, a páprica e a fraldinha desfiada; tempere com sal e pimenta.',
+      ingredientesVinculados: ['oleo', 'cebola', 'alho', 'tomate', 'paprica', 'fraldinha', 'sal-pimenta'],
+    },
+    {
+      numero: 3,
+      titulo: 'Cozinhe o arroz',
+      descricao:
+        'Acrescente o arroz e refogue por 1 minuto. Junte 800 ml do caldo reservado, prove o sal e cozinhe em fogo baixo com a panela semitampada até o arroz ficar macio e o líquido secar. Se necessário, adicione mais caldo quente.',
+      tempoMinutos: 20,
+      ingredientesVinculados: ['arroz', 'agua', 'sal-pimenta'],
+    },
+    {
+      numero: 4,
+      titulo: 'Descanse e sirva',
+      descricao:
+        'Desligue o fogo, tampe a panela e deixe descansar por 5 minutos. Solte o arroz com um garfo, misture o cheiro-verde e sirva.',
+      ingredientesVinculados: ['cheiro-verde'],
+    },
+  ],
+  dicas: [
+    'Use o caldo do cozimento da carne para dar mais sabor ao arroz e acrescente-o quente.',
+    'O tempo de cozimento da carne pode variar conforme o tamanho dos pedaços e a panela.',
+  ],
+  substituicoes: [
+    {
+      ingrediente: 'fraldinha',
+      substituto: 'acém ou paleta bovina',
+      observacao: 'Cozinhe até a carne ficar macia o suficiente para desfiar.',
+    },
+  ],
+  restricoesAlimentares: [],
+  tipoRefeicao: 'almoço',
+  ocasioes: ['almoço em família', 'jantar'],
+} satisfies Receita

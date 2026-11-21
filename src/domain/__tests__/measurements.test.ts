@@ -26,6 +26,14 @@ describe('converterMedidas', () => {
     })
   })
 
+  it('reconhece doce de leite em vez de confundi-lo com leite', () => {
+    const conversao = converterMedidas(1, 'xícara', 'g', 'doce de leite')
+
+    expect(conversao.quantidade).toBeCloseTo(312)
+    expect(conversao.confiavel).toBe(true)
+    expect(conversao.aviso).toContain('doce de leite')
+  })
+
   it('rejeita quantidades negativas', () => {
     expect(converterMedidas(-1, 'g', 'kg', 'açúcar')).toMatchObject({
       quantidade: null,

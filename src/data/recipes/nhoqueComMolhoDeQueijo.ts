@@ -1,0 +1,162 @@
+import type { Receita } from '../../types/recipe'
+
+export const nhoqueComMolhoDeQueijo = {
+  id: 'nhoque-com-molho-de-queijo',
+  slug: 'nhoque-com-molho-de-queijo',
+  titulo: 'Nhoque de batata com molho de queijo',
+  descricaoCurta: 'Nhoque caseiro macio servido com molho cremoso de queijo.',
+  descricaoCompleta:
+    'Nhoque feito com batata e farinha, acompanhado de molho branco com queijo. Cozinhe a massa apenas até subir à superfície para preservar a textura macia.',
+  imagem: '/images/receitas/nhoque-de-batata-com-molho-de-queijo.jpg',
+  categoriaPrincipal: 'Pratos principais',
+  categorias: ['Pratos principais', 'Massas', 'Vegetarianas'],
+  subcategorias: ['Nhoque', 'Massas caseiras'],
+  tags: ['nhoque', 'batata', 'molho de queijo', 'massa caseira'],
+  dificuldade: 'média',
+  tempos: {
+    preparoMinutos: 35,
+    cozimentoMinutos: 25,
+    totalMinutos: 60,
+  },
+  rendimentoBase: 4,
+  rendimentoLabel: '4 porções',
+  ingredientes: [
+    {
+      id: 'batatas',
+      nome: 'batatas grandes',
+      quantidade: 800,
+      unidade: 'g',
+      opcional: false,
+      indivisivel: false,
+    },
+    {
+      id: 'farinha',
+      nome: 'farinha de trigo',
+      quantidade: 200,
+      unidade: 'g',
+      opcional: false,
+      indivisivel: false,
+    },
+    {
+      id: 'gema',
+      nome: 'gema',
+      quantidade: 1,
+      unidade: 'unidade',
+      opcional: false,
+      indivisivel: true,
+    },
+    {
+      id: 'sal-massa',
+      nome: 'sal',
+      quantidade: null,
+      unidade: 'a gosto',
+      opcional: false,
+      indivisivel: false,
+    },
+    {
+      id: 'manteiga',
+      nome: 'manteiga',
+      quantidade: 30,
+      unidade: 'g',
+      opcional: false,
+      indivisivel: false,
+    },
+    {
+      id: 'farinha-molho',
+      nome: 'farinha de trigo',
+      quantidade: 20,
+      unidade: 'g',
+      opcional: false,
+      indivisivel: false,
+    },
+    {
+      id: 'leite',
+      nome: 'leite',
+      quantidade: 400,
+      unidade: 'ml',
+      opcional: false,
+      indivisivel: false,
+    },
+    {
+      id: 'queijo',
+      nome: 'queijo muçarela ralado',
+      quantidade: 150,
+      unidade: 'g',
+      opcional: false,
+      indivisivel: false,
+    },
+    {
+      id: 'parmesao',
+      nome: 'queijo parmesão ralado',
+      quantidade: 30,
+      unidade: 'g',
+      opcional: false,
+      indivisivel: false,
+    },
+    {
+      id: 'tempero-molho',
+      nome: 'sal, pimenta-do-reino e noz-moscada',
+      quantidade: null,
+      unidade: 'a gosto',
+      opcional: false,
+      indivisivel: false,
+    },
+  ],
+  etapas: [
+    {
+      numero: 1,
+      titulo: 'Cozinhe e amasse as batatas',
+      descricao:
+        'Cozinhe as batatas inteiras com casca em água até ficarem macias. Escorra, descasque ainda mornas e amasse. Espere o purê amornar.',
+      ingredientesVinculados: ['batatas'],
+    },
+    {
+      numero: 2,
+      titulo: 'Faça a massa',
+      descricao:
+        'Misture o purê com a gema e o sal. Acrescente a farinha aos poucos, somente até formar uma massa macia que não grude excessivamente nas mãos.',
+      ingredientesVinculados: ['batatas', 'gema', 'sal-massa', 'farinha'],
+    },
+    {
+      numero: 3,
+      titulo: 'Modele e cozinhe o nhoque',
+      descricao:
+        'Em uma superfície enfarinhada, faça rolinhos e corte em pedaços. Cozinhe em pequenas porções em água fervente com sal; retire com uma escumadeira quando subirem à superfície.',
+      ingredientesVinculados: ['farinha', 'sal-massa'],
+    },
+    {
+      numero: 4,
+      titulo: 'Prepare o molho de queijo',
+      descricao:
+        'Derreta a manteiga em fogo baixo, junte a farinha e mexa por 1 minuto. Adicione o leite aos poucos, mexendo até engrossar. Incorpore a muçarela e o parmesão e tempere com sal, pimenta e noz-moscada.',
+      ingredientesVinculados: [
+        'manteiga',
+        'farinha-molho',
+        'leite',
+        'queijo',
+        'parmesao',
+        'tempero-molho',
+      ],
+    },
+    {
+      numero: 5,
+      titulo: 'Sirva',
+      descricao: 'Distribua o molho quente sobre o nhoque cozido e sirva imediatamente.',
+      ingredientesVinculados: [],
+    },
+  ],
+  dicas: [
+    'Use o mínimo de farinha necessário: excesso deixa o nhoque pesado.',
+    'Cozinhe as batatas com casca para que absorvam menos água.',
+  ],
+  substituicoes: [
+    {
+      ingrediente: 'queijo muçarela',
+      substituto: 'queijo prato ou meia-cura',
+      observacao: 'O sabor e a cremosidade do molho podem variar.',
+    },
+  ],
+  restricoesAlimentares: ['vegetariana'],
+  tipoRefeicao: 'almoço',
+  ocasioes: ['almoço em família', 'jantar'],
+} satisfies Receita

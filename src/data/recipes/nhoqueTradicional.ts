@@ -1,0 +1,163 @@
+import type { Receita } from '../../types/recipe'
+
+export const nhoqueTradicional = {
+  id: 'nhoque-tradicional-de-batata',
+  slug: 'nhoque-tradicional-de-batata',
+  titulo: 'Nhoque tradicional de batata',
+  descricaoCurta: 'Nhoque caseiro de batata com molho simples de tomate.',
+  descricaoCompleta:
+    'Uma receita clássica de nhoque de batata, servido com molho de tomate caseiro e parmesão. A massa fica mais leve quando se usa pouca farinha e se evita sovar.',
+  imagem: '/images/receitas/nhoque-tradicional-de-batata.jpg',
+  categoriaPrincipal: 'Pratos principais',
+  categorias: ['Pratos principais', 'Massas', 'Vegetarianas'],
+  subcategorias: ['Nhoque', 'Massas caseiras'],
+  tags: ['nhoque', 'batata', 'molho de tomate', 'tradicional'],
+  dificuldade: 'média',
+  tempos: {
+    preparoMinutos: 35,
+    cozimentoMinutos: 30,
+    totalMinutos: 65,
+  },
+  rendimentoBase: 4,
+  rendimentoLabel: '4 porções',
+  ingredientes: [
+    {
+      id: 'batatas',
+      nome: 'batatas grandes',
+      quantidade: 1,
+      unidade: 'kg',
+      opcional: false,
+      indivisivel: false,
+    },
+    {
+      id: 'farinha',
+      nome: 'farinha de trigo',
+      quantidade: 250,
+      unidade: 'g',
+      opcional: false,
+      indivisivel: false,
+    },
+    {
+      id: 'ovo',
+      nome: 'ovo',
+      quantidade: 1,
+      unidade: 'unidade',
+      opcional: false,
+      indivisivel: true,
+    },
+    {
+      id: 'sal-massa',
+      nome: 'sal',
+      quantidade: null,
+      unidade: 'a gosto',
+      opcional: false,
+      indivisivel: false,
+    },
+    {
+      id: 'azeite',
+      nome: 'azeite',
+      quantidade: 15,
+      unidade: 'ml',
+      opcional: false,
+      indivisivel: false,
+    },
+    {
+      id: 'cebola',
+      nome: 'cebola picada',
+      quantidade: 1,
+      unidade: 'unidade',
+      opcional: false,
+      indivisivel: true,
+    },
+    {
+      id: 'alho',
+      nome: 'dentes de alho picados',
+      quantidade: 2,
+      unidade: 'unidades',
+      opcional: false,
+      indivisivel: true,
+    },
+    {
+      id: 'tomate',
+      nome: 'tomates pelados com o molho',
+      quantidade: 400,
+      unidade: 'g',
+      opcional: false,
+      indivisivel: false,
+    },
+    {
+      id: 'oregano',
+      nome: 'orégano',
+      quantidade: 2,
+      unidade: 'g',
+      opcional: true,
+      indivisivel: false,
+    },
+    {
+      id: 'tempero-molho',
+      nome: 'sal e pimenta-do-reino',
+      quantidade: null,
+      unidade: 'a gosto',
+      opcional: false,
+      indivisivel: false,
+    },
+    {
+      id: 'parmesao',
+      nome: 'queijo parmesão ralado',
+      quantidade: 40,
+      unidade: 'g',
+      opcional: true,
+      indivisivel: false,
+    },
+  ],
+  etapas: [
+    {
+      numero: 1,
+      titulo: 'Cozinhe as batatas',
+      descricao:
+        'Cozinhe as batatas inteiras com casca em água até ficarem macias. Escorra, descasque ainda mornas e passe por um espremedor. Espere o purê amornar.',
+      ingredientesVinculados: ['batatas'],
+    },
+    {
+      numero: 2,
+      titulo: 'Prepare e modele a massa',
+      descricao:
+        'Misture o purê com o ovo e o sal. Acrescente a farinha aos poucos, sem sovar, até obter uma massa macia. Faça rolinhos em uma superfície enfarinhada e corte em pedaços.',
+      ingredientesVinculados: ['batatas', 'ovo', 'sal-massa', 'farinha'],
+    },
+    {
+      numero: 3,
+      titulo: 'Cozinhe o nhoque',
+      descricao:
+        'Cozinhe os pedaços em pequenas porções em uma panela com água fervente e sal. Retire com uma escumadeira assim que subirem à superfície.',
+      ingredientesVinculados: ['sal-massa'],
+    },
+    {
+      numero: 4,
+      titulo: 'Faça o molho de tomate',
+      descricao:
+        'Aqueça o azeite e refogue a cebola até ficar macia. Junte o alho, os tomates e o orégano. Cozinhe em fogo baixo por 15 minutos e tempere com sal e pimenta.',
+      ingredientesVinculados: ['azeite', 'cebola', 'alho', 'tomate', 'oregano', 'tempero-molho'],
+    },
+    {
+      numero: 5,
+      titulo: 'Finalize e sirva',
+      descricao: 'Cubra o nhoque com o molho quente e, se desejar, finalize com parmesão ralado.',
+      ingredientesVinculados: ['parmesao'],
+    },
+  ],
+  dicas: [
+    'A quantidade de farinha pode variar conforme a umidade das batatas; adicione aos poucos.',
+    'Não sove a massa para manter o nhoque macio.',
+  ],
+  substituicoes: [
+    {
+      ingrediente: 'tomates pelados',
+      substituto: 'passata de tomate',
+      observacao: 'Use a mesma quantidade e ajuste o tempero ao final.',
+    },
+  ],
+  restricoesAlimentares: ['vegetariana'],
+  tipoRefeicao: 'almoço',
+  ocasioes: ['almoço em família', 'jantar'],
+} satisfies Receita
