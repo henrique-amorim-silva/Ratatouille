@@ -1,0 +1,36 @@
+import type { Receita } from '../../types/recipe'
+
+export const panquecaDeAveiaBanana = {
+  id: 'panqueca-de-aveia-e-banana',
+  slug: 'panqueca-de-aveia-e-banana',
+  titulo: 'Panqueca de aveia e banana',
+  descricaoCurta: 'Panquecas macias adoçadas pela banana, prontas em poucos minutos.',
+  descricaoCompleta: 'Uma opção prática para o café da manhã ou lanche, feita no liquidificador com ingredientes simples e sem açúcar refinado.',
+  imagem: '/images/receitas/panqueca-de-aveia-banana.jpg',
+  categoriaPrincipal: 'Lanches',
+  categorias: ['Lanches', 'Café da manhã', 'Saudáveis', 'Vegetarianas'],
+  subcategorias: ['Panquecas', 'Sem açúcar refinado'],
+  tags: ['panqueca', 'aveia', 'banana', 'café da manhã', 'fit'],
+  dificuldade: 'fácil',
+  tempos: { preparoMinutos: 8, cozimentoMinutos: 12, totalMinutos: 20 },
+  rendimentoBase: 4,
+  rendimentoLabel: '8 panquecas',
+  ingredientes: [
+    { id: 'banana', nome: 'banana madura', quantidade: 1, unidade: 'unidade', opcional: false, indivisivel: true },
+    { id: 'ovo', nome: 'ovo', quantidade: 1, unidade: 'unidade', opcional: false, indivisivel: true },
+    { id: 'aveia', nome: 'aveia em flocos finos', quantidade: 100, unidade: 'g', opcional: false, indivisivel: false },
+    { id: 'leite', nome: 'leite ou bebida vegetal', quantidade: 120, unidade: 'ml', opcional: false, indivisivel: false },
+    { id: 'fermento', nome: 'fermento em pó', quantidade: 5, unidade: 'g', opcional: false, indivisivel: false },
+  ],
+  etapas: [
+    { numero: 1, titulo: 'Bata a massa', descricao: 'Bata a banana, o ovo, a aveia e o leite no liquidificador até obter uma massa lisa.', tempoMinutos: 3, ingredientesVinculados: ['banana', 'ovo', 'aveia', 'leite'] },
+    { numero: 2, titulo: 'Adicione o fermento', descricao: 'Misture o fermento delicadamente com uma colher; deixe a massa descansar por 2 minutos.', tempoMinutos: 2, ingredientesVinculados: ['fermento'] },
+    { numero: 3, titulo: 'Doure as panquecas', descricao: 'Aqueça uma frigideira antiaderente em fogo baixo. Despeje porções pequenas e vire quando surgirem bolhas. Cozinhe até dourar dos dois lados.', tempoMinutos: 12, ingredientesVinculados: [] },
+  ],
+  dicas: ['Use frigideira bem aquecida em fogo baixo para evitar que a aveia queime antes de firmar.', 'Sirva com iogurte, frutas ou uma colher pequena de pasta de amendoim.'],
+  substituicoes: [{ ingrediente: 'ovo', substituto: '100 g de banana adicional', observacao: 'A massa ficará um pouco mais densa.' }],
+  restricoesAlimentares: ['vegetariana'],
+  tipoRefeicao: 'café da manhã',
+  ocasioes: ['café da manhã', 'lanche da tarde'],
+  nutricao: { origem: 'estimada', porcao: '2 panquecas', caloriasKcal: 210, carboidratosG: 35, proteinasG: 9, gordurasG: 5, fibrasG: 5, sodioMg: 180 },
+} satisfies Receita

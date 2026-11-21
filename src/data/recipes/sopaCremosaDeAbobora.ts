@@ -1,0 +1,38 @@
+import type { Receita } from '../../types/recipe'
+
+export const sopaCremosaDeAbobora = {
+  id: 'sopa-cremosa-de-abobora',
+  slug: 'sopa-cremosa-de-abobora',
+  titulo: 'Sopa cremosa de abóbora',
+  descricaoCurta: 'Sopa aveludada de abóbora, batata-doce e coco, sem adição de creme de leite.',
+  descricaoCompleta: 'Uma sopa reconfortante e fácil, com vegetais assados ou cozidos juntos e uma textura cremosa obtida apenas no liquidificador.',
+  imagem: '/images/receitas/sopa-cremosa-abobora.jpg',
+  categoriaPrincipal: 'Pratos principais',
+  categorias: ['Pratos principais', 'Sopas', 'Saudáveis', 'Vegetarianas'],
+  subcategorias: ['Sopas cremosas', 'Vegetais'],
+  tags: ['sopa', 'abóbora', 'batata doce', 'cremosa', 'sem lactose'],
+  dificuldade: 'fácil',
+  tempos: { preparoMinutos: 10, cozimentoMinutos: 25, totalMinutos: 35 },
+  rendimentoBase: 4,
+  rendimentoLabel: '4 tigelas',
+  ingredientes: [
+    { id: 'abobora', nome: 'abóbora cabotiã em cubos', quantidade: 600, unidade: 'g', opcional: false, indivisivel: false },
+    { id: 'batata-doce', nome: 'batata-doce em cubos', quantidade: 250, unidade: 'g', opcional: false, indivisivel: false },
+    { id: 'cebola', nome: 'cebola picada', quantidade: 1, unidade: 'unidade', opcional: false, indivisivel: true },
+    { id: 'alho', nome: 'dentes de alho', quantidade: 2, unidade: 'unidades', opcional: false, indivisivel: true },
+    { id: 'leite-coco', nome: 'leite de coco leve', quantidade: 200, unidade: 'ml', opcional: false, indivisivel: false },
+    { id: 'agua', nome: 'água ou caldo de legumes', quantidade: 600, unidade: 'ml', opcional: false, indivisivel: false },
+    { id: 'gengibre', nome: 'gengibre ralado', quantidade: 5, unidade: 'g', opcional: true, indivisivel: false },
+  ],
+  etapas: [
+    { numero: 1, titulo: 'Refogue os aromáticos', descricao: 'Aqueça uma panela, refogue a cebola e o alho por 3 minutos e acrescente o gengibre.', tempoMinutos: 3, ingredientesVinculados: ['cebola', 'alho', 'gengibre'] },
+    { numero: 2, titulo: 'Cozinhe os vegetais', descricao: 'Junte a abóbora, a batata-doce e o líquido. Cozinhe com a panela parcialmente tampada por 20 a 25 minutos, até os cubos ficarem macios.', tempoMinutos: 25, ingredientesVinculados: ['abobora', 'batata-doce', 'agua'] },
+    { numero: 3, titulo: 'Bata e finalize', descricao: 'Desligue o fogo, bata a sopa com cuidado até ficar lisa e misture o leite de coco. Ajuste a consistência com mais líquido, se necessário.', tempoMinutos: 5, ingredientesVinculados: ['leite-coco'] },
+  ],
+  dicas: ['Bata líquidos quentes em pequenas porções e deixe uma abertura no centro da tampa.', 'Guarde por até três dias refrigerada ou congele em porções individuais.'],
+  substituicoes: [{ ingrediente: 'leite de coco', substituto: 'iogurte natural', observacao: 'Adicione o iogurte fora do fogo para evitar que talhe.' }],
+  restricoesAlimentares: ['vegetariana', 'sem lactose'],
+  tipoRefeicao: 'jantar',
+  ocasioes: ['dia a dia', 'jantar', 'dia frio'],
+  nutricao: { origem: 'estimada', porcao: '1 tigela', caloriasKcal: 220, carboidratosG: 32, proteinasG: 4, gordurasG: 9, fibrasG: 6, sodioMg: 190 },
+} satisfies Receita

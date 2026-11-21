@@ -1,0 +1,37 @@
+import type { Receita } from '../../types/recipe'
+
+export const omeleteDeFornoComLegumes = {
+  id: 'omelete-de-forno-com-legumes',
+  slug: 'omelete-de-forno-com-legumes',
+  titulo: 'Omelete de forno com legumes',
+  descricaoCurta: 'Omelete assada, prática para preparar em porções e aproveitar legumes.',
+  descricaoCompleta: 'Uma omelete de forno macia, fácil de transportar e adaptável aos legumes disponíveis na geladeira.',
+  imagem: '/images/receitas/omelete-forno-legumes.jpg',
+  categoriaPrincipal: 'Lanches',
+  categorias: ['Lanches', 'Saudáveis', 'Vegetarianas', 'Café da manhã'],
+  subcategorias: ['Omeletes', 'Assado no forno'],
+  tags: ['omelete', 'ovo', 'legumes', 'prático', 'lanche'],
+  dificuldade: 'fácil',
+  tempos: { preparoMinutos: 10, cozimentoMinutos: 20, totalMinutos: 30 },
+  rendimentoBase: 4,
+  rendimentoLabel: '4 fatias',
+  ingredientes: [
+    { id: 'ovos', nome: 'ovos', quantidade: 6, unidade: 'unidades', opcional: false, indivisivel: true },
+    { id: 'espinafre', nome: 'espinafre picado', quantidade: 100, unidade: 'g', opcional: false, indivisivel: false },
+    { id: 'tomate', nome: 'tomate picado', quantidade: 1, unidade: 'unidade', opcional: false, indivisivel: true },
+    { id: 'cebola', nome: 'cebola picada', quantidade: 0.5, unidade: 'unidade', opcional: false, indivisivel: true },
+    { id: 'queijo', nome: 'queijo minas ralado', quantidade: 60, unidade: 'g', opcional: true, indivisivel: false },
+    { id: 'leite', nome: 'leite', quantidade: 60, unidade: 'ml', opcional: false, indivisivel: false },
+  ],
+  etapas: [
+    { numero: 1, titulo: 'Prepare a forma', descricao: 'Aqueça o forno a 180 °C e unte uma forma pequena ou forre-a com papel-manteiga.', tempoMinutos: 5, ingredientesVinculados: [] },
+    { numero: 2, titulo: 'Misture os ingredientes', descricao: 'Bata os ovos com o leite e o sal. Acrescente o espinafre, o tomate, a cebola e o queijo.', tempoMinutos: 5, ingredientesVinculados: ['ovos', 'leite', 'espinafre', 'tomate', 'cebola', 'queijo'] },
+    { numero: 3, titulo: 'Asse', descricao: 'Distribua a mistura na forma e asse por 18 a 20 minutos, até firmar no centro e dourar nas bordas.', tempoMinutos: 20, ingredientesVinculados: [] },
+  ],
+  dicas: ['A forma deve ter cerca de 20 cm para cozinhar por igual.', 'Rale o tomate grosso ou retire as sementes para evitar excesso de líquido.'],
+  substituicoes: [{ ingrediente: 'espinafre', substituto: 'brócolis picado previamente cozido', observacao: 'Escorra bem para não umedecer a omelete.' }],
+  restricoesAlimentares: ['vegetariana'],
+  tipoRefeicao: 'café da manhã',
+  ocasioes: ['café da manhã', 'lanche', 'meal prep'],
+  nutricao: { origem: 'estimada', porcao: '1 fatia', caloriasKcal: 170, carboidratosG: 4, proteinasG: 12, gordurasG: 12, fibrasG: 1, sodioMg: 230 },
+} satisfies Receita

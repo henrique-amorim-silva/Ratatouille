@@ -20,6 +20,12 @@ import { couveFlorEmpanadaNaAirFryer } from './couveFlorEmpanadaNaAirFryer'
 import { nhoqueComMolhoDeQueijo } from './nhoqueComMolhoDeQueijo'
 import { nhoqueTradicional } from './nhoqueTradicional'
 import { arrozDeFraldinha } from './arrozDeFraldinha'
+import { tortaDoPicaPau } from './tortaDoPicaPau'
+import { panquecaDeAveiaBanana } from './panquecaDeAveiaBanana'
+import { frangoGrelhadoComLegumes } from './frangoGrelhadoComLegumes'
+import { sopaCremosaDeAbobora } from './sopaCremosaDeAbobora'
+import { omeleteDeFornoComLegumes } from './omeleteDeFornoComLegumes'
+import { tigelaDeGraoDeBico } from './tigelaDeGraoDeBico'
 
 export const receitas = [
   boloDeCenoura,
@@ -43,4 +49,10 @@ export const receitas = [
   nhoqueComMolhoDeQueijo,
   nhoqueTradicional,
   arrozDeFraldinha,
+  tortaDoPicaPau,
+  panquecaDeAveiaBanana,
+  frangoGrelhadoComLegumes,
+  sopaCremosaDeAbobora,
+  omeleteDeFornoComLegumes,
+  tigelaDeGraoDeBico,
 ].map((receita) => recipeSchema.parse(receita))
