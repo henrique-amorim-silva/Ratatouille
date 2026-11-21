@@ -11,6 +11,7 @@ describe('buscarEFiltrarReceitas', () => {
       'hamburguer-de-massa-de-pastel',
       'nuggets-fit-caseiro',
       'overnight-oats-de-banana',
+      'panqueca-de-aveia-e-banana',
       'pudim-proteico-com-doce-de-leite',
       'pure-de-couve-flor',
       'tofu-salteado-com-legumes',
