@@ -2780,21 +2780,34 @@
   .navegacao--principal {
     display: flex;
     width: 100%;
-    height: 66px;
+    height: calc(66px + env(safe-area-inset-bottom));
     position: fixed;
     z-index: 5;
     right: 0;
     bottom: 0;
     left: 0;
-    justify-content: space-around;
+    justify-content: flex-start;
     gap: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    overscroll-behavior-inline: contain;
+    padding-bottom: env(safe-area-inset-bottom);
+    box-sizing: border-box;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x;
     border-top: 1px solid var(--app-border);
     background: var(--app-surface);
     box-shadow: 0 -7px 20px #2028230b;
   }
 
+  .navegacao--principal::-webkit-scrollbar {
+    display: none;
+  }
+
   .navegacao__link {
     min-width: 66px;
+    flex: 0 0 66px;
     min-height: 54px;
     padding: 6px 8px;
     flex-direction: column;
