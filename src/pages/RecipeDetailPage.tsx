@@ -44,6 +44,9 @@ function RecipeDetailContent({ receita }: { receita: (typeof receitas)[number] }
   const faltantes = ajuste.ingredientes.filter(
     (ingrediente) => !ingredientesDisponiveis.includes(ingrediente.id),
   )
+  const imagem = receita.imagem.startsWith('/')
+    ? `${import.meta.env.BASE_URL}${receita.imagem.slice(1)}`
+    : receita.imagem
 
   useEffect(() => {
     let ativo = true
@@ -133,7 +136,7 @@ function RecipeDetailContent({ receita }: { receita: (typeof receitas)[number] }
       </Link>
       <article className="detalhe-receita">
         <header className="detalhe-receita__cabecalho">
-          <div>
+          <div className="detalhe-receita__conteudo">
             <p className="sobretitulo">{receita.categoriaPrincipal}</p>
             <h1>{receita.titulo}</h1>
             <p>{receita.descricaoCompleta}</p>
@@ -143,23 +146,34 @@ function RecipeDetailContent({ receita }: { receita: (typeof receitas)[number] }
               <span>{receita.rendimentoLabel}</span>
             </div>
           </div>
-          <div className="detalhe-receita__acoes nao-imprimir">
-            <button
-              className="botao botao--secundario"
-              type="button"
-              onClick={() => window.print()}
-            >
-              <Printer size={17} aria-hidden="true" /> Imprimir receita
-            </button>
-            <button
-              className={`botao botao--favorito${favorito ? ' botao--favorito-ativo' : ''}`}
-              type="button"
-              aria-pressed={favorito}
-              onClick={() => alternarFavorito(receita.id)}
-            >
-              <Heart size={18} fill={favorito ? 'currentColor' : 'none'} aria-hidden="true" />
-              {favorito ? 'Favoritada' : 'Favoritar'}
-            </button>
+          <div className="detalhe-receita__visual">
+            <div className="detalhe-receita__acoes nao-imprimir">
+              <button
+                className="botao botao--secundario"
+                type="button"
+                onClick={() => window.print()}
+              >
+                <Printer size={17} aria-hidden="true" /> Imprimir receita
+              </button>
+              <button
+                className={`botao botao--favorito${favorito ? ' botao--favorito-ativo' : ''}`}
+                type="button"
+                aria-pressed={favorito}
+                onClick={() => alternarFavorito(receita.id)}
+              >
+                <Heart size={18} fill={favorito ? 'currentColor' : 'none'} aria-hidden="true" />
+                {favorito ? 'Favoritada' : 'Favoritar'}
+              </button>
+            </div>
+            <div className="detalhe-receita__imagem-container">
+              <img
+                className="detalhe-receita__imagem"
+                src={imagem}
+                alt={receita.titulo}
+                loading="eager"
+                decoding="async"
+              />
+            </div>
           </div>
         </header>
 

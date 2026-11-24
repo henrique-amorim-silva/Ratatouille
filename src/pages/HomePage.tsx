@@ -18,9 +18,9 @@ export function HomePage() {
   const [receitaSurpresa, setReceitaSurpresa] = useState<Receita | null>(null)
   const favoritos = useFavoritosStore((estado) => estado.favoritos)
   const alternarFavorito = useFavoritosStore((estado) => estado.alternarFavorito)
-  const destaques = [receitas[0], receitas[1]].filter((receita) => receita !== undefined)
+  const destaques = receitas.slice(0, 3)
   const rapidas = receitas
-    .filter((receita) => receita.tempos.totalMinutos <= 50)
+    .filter((receita) => receita.tempos.totalMinutos <= 30)
     .sort((a, b) => a.tempos.totalMinutos - b.tempos.totalMinutos)
     .slice(0, 3)
 
@@ -123,7 +123,7 @@ export function HomePage() {
           <div>
             <p className="sobretitulo">SEM COMPLICAÇÃO</p>
             <h2>Rápidas para hoje</h2>
-            <p className="receitas__subtitulo">Receitas prontas em até 50 minutos.</p>
+            <p className="receitas__subtitulo">Receitas prontas em até 30 minutos.</p>
           </div>
         </div>
         <div className="grade-receitas">

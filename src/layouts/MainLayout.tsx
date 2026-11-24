@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useLayoutEffect, useState } from 'react'
 import {
   Archive,
   CalendarDays,
@@ -12,7 +12,7 @@ import {
   Search,
   Sun,
 } from 'lucide-react'
-import { NavLink, Outlet } from 'react-router-dom'
+import { NavLink, Outlet, useLocation } from 'react-router-dom'
 import { PwaUpdatePrompt } from '../components/layout/PwaUpdatePrompt'
 import '../App.css'
 
@@ -28,6 +28,7 @@ const links = [
 ]
 
 export function MainLayout() {
+  const { pathname, search } = useLocation()
   const [tema, setTema] = useState<'claro' | 'escuro'>(() => {
     const temaSalvo = localStorage.getItem('ratatouille-tema')
     if (temaSalvo === 'claro' || temaSalvo === 'escuro') {
@@ -40,6 +41,10 @@ export function MainLayout() {
   useEffect(() => {
     localStorage.setItem('ratatouille-tema', tema)
   }, [tema])
+
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0)
+  }, [pathname, search])
 
   return (
     <div className="app-shell" data-tema={tema}>
